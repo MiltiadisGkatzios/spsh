@@ -1,0 +1,138 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.com/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shsp: <https://github.com/MiltiadisGkatzios/shsp/> .
+@prefix shsp-fnc: <https://github.com/MiltiadisGkatzios/shsp/function#> .
+@prefix shsp-opr: <https://github.com/MiltiadisGkatzios/shsp/operator#> .
+@prefix shsp-smb: <https://github.com/MiltiadisGkatzios/shsp/symbol#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://github.com/MiltiadisGkatzios/shacl-sparql/example/>
+  rdf:type owl:Ontology ;
+  dc:creator "Miltiadis Gkatzios" ;
+  dcterms:created "2025-01-04"^^xsd:date ;
+  dcterms:modified "2025-03-29"^^xsd:date ;
+  owl:imports <https://github.com/MiltiadisGkatzios/shacl-sparql/> ;
+  owl:versionInfo "0.8.0" ;
+  owl:versionIRI <https://github.com/MiltiadisGkatzios/shacl-sparql/example/0.8.0/> ;
+.
+
+# Derived/Computed property
+## Shape
+ex:PersonShape
+  rdf:type sh:NodeShape ;
+  sh:rule ex:AgeComputation ;
+  sh:targetClass ex:Person .
+## TripleRule
+ex:AgeComputation
+  rdf:type sh:TripleRule ;
+  sh:subject sh:this ;
+  sh:predicate ex:age ;
+  sh:object [
+    shsp-opr:SUBTRACT (          
+      [ shsp-fnc:YEAR ( 
+        [ shsp-fnc:NOW ( ) ] ) ]
+      [ sh:path ex:birthYear ]
+    )
+  ]
+.
+##Data
+ex:Bob rdf:type ex:Person ;
+  ex:birthYear "1990"^^xsd:integer .
+ex:Alice rdf:type ex:Person ;
+  ex:birthYear "1990-01-01"^^xsd:date .
+
+# Default value computation
+## Shape
+ex:OrderShape
+  rdf:type sh:NodeShape ;
+  sh:rule ex:ShippingMethodDefault ;
+  sh:targetClass ex:Order .
+## TripleRule
+ex:ShippingMethodDefault
+  rdf:type sh:TripleRule ;
+  sh:condition [
+    sh:property [
+      sh:path ex:shippingMethod ;
+      sh:maxCount 0 ;
+    ]
+  ] ;
+  sh:subject sh:this ;
+  sh:predicate ex:shippingMethod ;
+  sh:object [
+    shsp-fnc:IF (
+      [ shsp-opr:GREATER_THAN_OR_EQUALS ( 
+        [ sh:path ex:weight ] 
+        10 ) ] 
+      "express" 
+      "standard"
+    )
+  ] 
+.
+##Data
+ex:Order_01 rdf:type ex:Order ;
+  ex:weight "5"^^xsd:integer .
+ex:Order_02 rdf:type ex:Order ;
+  ex:weight "12"^^xsd:integer .
+ex:Order_03 rdf:type ex:Order ;
+  ex:weight "3"^^xsd:integer ;
+  ex:shippingMethod "express" .
+
+# Normalization
+## Shape
+ex:PersonShape
+  rdf:type sh:NodeShape ;
+  sh:rule ex:FamilyNameComputation ;
+  sh:targetClass ex:Person .
+## TripleRule
+ex:FamilyNameComputation
+  rdf:type sh:TripleRule ;
+  sh:subject sh:this ;
+  sh:predicate ex:normalisedLastName ;
+  sh:object [
+    shsp-fnc:COALESCE (          
+      [ sh:path ex:lastName ]
+      [ shsp-fnc:COALESCE (                    
+        [ sh:path ex:surname ]
+        [ sh:path ex:familyName ] ) ] 
+    ) 
+  ]
+.
+##Data
+ex:Bob rdf:type ex:Person ;
+  ex:surname "Doe" .
+ex:Alice rdf:type ex:Person ;
+  ex:fatherName "Doe" .
+
+#Denormalization
+## Shape
+ex:ItemShape
+  rdf:type sh:NodeShape ;
+  sh:rule ex:ItemComputation ;
+  sh:targetObjectsOf ex:hasItem .
+## TripleRule
+ex:ItemComputation
+  rdf:type sh:TripleRule ;
+  sh:subject [ sh:path [ sh:inversePath ex:hasItem ] ] ;
+  sh:predicate [
+    shsp-fnc:IRI (  
+      [ shsp-fnc:CONCAT ( 
+        [ shsp-fnc:STR ( ex:hasItem ) ]
+        [ shsp-fnc:CONCAT ( 
+          "_"
+          [ shsp-fnc:STR ( [ sh:path ex:sequence ] ) ] ) ]
+        )
+      ]
+    )
+  ] ;
+  sh:object sh:this ;
+.
+##Data
+ex:Order_1 ex:hasItem ex:Item_1 , ex:Item_2 , ex:Item_3 .
+ex:Item_1 ex:sequence "1"^^xsd:integer .
+ex:Item_2 ex:sequence "2"^^xsd:integer .
+ex:Item_3 ex:sequence "3"^^xsd:integer .
