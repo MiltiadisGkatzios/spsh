@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
 [GitHub Pages](https://miltiadisgkatzios.github.io/shacl-sparql/)
 
-This repository contains a **preliminary draft ontology** that formalizes **SPARQL 1.1 functions** as instances of `sh:SPARQLFunction` using **SHACL Advanced Features**.  
+This repository contains an ontology that formalizes **SPARQL 1.1 functions** as instances of `sh:SPARQLFunction` using **SHACL Advanced Features**.  
 
 It provides machine-readable representations of SPARQL functions, mathematical operations, and symbols. Each function is uniquely instantiated and described with labels, definitions, and references from SPARQL 1.1.  
 
