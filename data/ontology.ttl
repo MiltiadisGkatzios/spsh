@@ -1,0 +1,1613 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shsp: <https://github.com/MiltiadisGkatzios/shsp/> .
+@prefix shsp-fnc: <https://github.com/MiltiadisGkatzios/shsp/function#> .
+@prefix shsp-opr: <https://github.com/MiltiadisGkatzios/shsp/operator#> .
+@prefix shsp-smb: <https://github.com/MiltiadisGkatzios/shsp/symbol#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.com/> .
+
+<https://github.com/MiltiadisGkatzios/shacl-sparql/>
+  rdf:type owl:Ontology ;
+  dc:creator "Miltiadis Gkatzios" ;
+  dcterms:created "2023-12-18"^^xsd:date ;
+  dcterms:modified "2025-03-29"^^xsd:date ;
+  owl:imports sh: ;
+  owl:versionInfo "0.8.0" ;
+  owl:versionIRI <https://github.com/MiltiadisGkatzios/shacl-sparql/0.8.0/> ;
+  sh:declare [
+      sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+      sh:prefix "rdf" ;
+    ] ;
+  sh:declare [
+      sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+      sh:prefix "rdfs" ;
+    ] ;
+  sh:declare [
+      sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
+      sh:prefix "sh" ;
+    ] ;
+  sh:declare [
+      sh:namespace "https://github.com/MiltiadisGkatzios/shsp/"^^xsd:anyURI ;
+      sh:prefix "shsp" ;
+    ] ;
+  sh:declare [
+      sh:namespace "https://github.com/MiltiadisGkatzios/shsp/function#"^^xsd:anyURI ;
+      sh:prefix "shsp-fnc" ;
+    ] ;
+  sh:declare [
+      sh:namespace "https://github.com/MiltiadisGkatzios/shsp/operator#"^^xsd:anyURI ;
+      sh:prefix "shsp-opr" ;
+    ] ;
+  sh:declare [
+      sh:namespace "https://github.com/MiltiadisGkatzios/shsp/symbol#"^^xsd:anyURI ;
+      sh:prefix "shsp-smb" ;
+    ] ;
+.
+
+shsp-fnc:ABS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the absolute value of arg. An error is raised if arg is not a numeric value. This function is the same as fn:numeric-abs for terms with a datatype from XDM." ;
+  rdfs:label "SPARQL function ABS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-abs"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:order 1 ;
+      sh:optional "true"^^xsd:boolean ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ABS ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-opr:ADD
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the operator symbol '+' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL math operator add" ;
+  rdfs:seeAlso "https://www.w3.org/TR/xpath-functions/#func-numeric-add"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+  ]  ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+  ]  ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE { 
+      BIND ( ( ?arg_1 + ?arg_2 ) AS ?result ) 
+    }
+    """ ;
+.
+
+shsp-smb:AND
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns a logical AND of left and right. Note that logical-and operates on the effective boolean value of its arguments." ;
+  rdfs:label "SPARQL logical operator LOGICAL-AND" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-logical-and"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:boolean ;
+      sh:name "left" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:datatype xsd:boolean ;
+      sh:name "right" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT ?result
+    WHERE {
+      BIND ( ( ?arg_1 && ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+ 
+shsp-fnc:BNODE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The BNODE function constructs a blank node that is distinct from all blank nodes in the dataset being queried and distinct from all blank nodes created by calls to this constructor for other query solutions. If the no argument form is used, every call results in a distinct blank node. If the form with a simple literal is used, every call results in distinct blank nodes for different simple literals, and the same blank node for calls with the same simple literal within expressions for one solution mapping." ;
+  rdfs:label "SPARQL function BNODE" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-bnode"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( BOUND ( ?arg_1 ), BNODE ( ?arg_1 ), BNODE ( ) ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:BOUND
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns true if var is bound to a value. Returns false otherwise. Variables with the value NaN or INF are considered bound." ;
+  rdfs:label "SPARQL function BOUND" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-bound"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "var" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT ?result
+    WHERE {
+      BIND ( BOUND ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:CEIL
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the smallest (closest to negative infinity) number with no fractional part that is not less than the value of arg. An error is raised if arg is not a numeric value. This function is the same as fn:numeric-ceil for terms with a datatype from XDM." ;
+  rdfs:label "SPARQL function CEIL" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-ceil"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( CEIL ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:COALESCE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The COALESCE function form returns the RDF term value of the first expression that evaluates without error. In SPARQL, evaluating an unbound variable raises an error. If none of the arguments evaluates to an RDF term, an error is raised. If no expressions are evaluated without error, an error is raised." ;
+  rdfs:label "SPARQL function COALESCE" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-coalesce"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "expression 1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "expression 2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( COALESCE ( ?arg_1, ?arg_2 ) AS ?result)
+    }
+    """ ;
+.
+
+shsp-fnc:CONCAT
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The CONCAT function corresponds to the XPath fn:concat function. The function accepts string literals as arguments. The lexical form of the returned literal is obtained by concatenating the lexical forms of its inputs. If all input literals are typed literals of type xsd:string, then the returned literal is also of type xsd:string, if all input literals are plain literals with identical language tag, then the returned literal is a plain literal with the same language tag, in all other cases, the returned literal is a simple literal." ;
+  rdfs:label "SPARQL function CONCAT" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-concat"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "ltrl1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "ltrl2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( CONCAT ( ?arg_1, ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:CONTAINS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The CONTAINS function corresponds to the XPath fn:contains. The arguments must be argument compatible otherwise an error is raised." ;
+  rdfs:label "SPARQL function CONTAINS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-contains"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "arg2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT ?result
+    WHERE {
+      BIND ( CONTAINS ( ?arg_1 , ?arg_2 ) AS ?result )
+    }
+    """ ; 
+.
+
+shsp-fnc:DATATYPE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the datatype IRI of a literal. If the literal is a typed literal, return the datatype IRI. If the literal is a simple literal, return xsd:string. If the literal is literal with a language tag, return rdf:langString" ;
+  rdfs:label "SPARQL function DATATYPE" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-datatype"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "literal" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( DATATYPE ( ?arg_1 ) AS ?result)
+    }
+    """ ;
+.
+shsp-fnc:DAY
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the day part of arg as an integer. This function corresponds to fn:day-from-dateTime." ;
+  rdfs:label "SPARQL function DAY" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-day"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:dateTime ;
+      sh:name "arg" ;     
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:integer ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( DAY ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+ 
+shsp-opr:DIVIDE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the operator symbol '/' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL math operator divide" ;
+  sh:parameter [ 
+      sh:path shsp:arg_1 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+  ]  ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+  ]  ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {  
+      BIND ( ( ?arg_1 / ?arg_2 ) AS ?result ) 
+    }
+    """ ;
+.
+
+shsp-fnc:ENCODE_FOR_URI
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The ENCODE_FOR_URI function corresponds to the XPath fn:encode-for-uri function. It returns a simple literal with the lexical form obtained from the lexical form of its input after translating reserved characters according to the fn:encode-for-uri function." ;
+  rdfs:label "SPARQL function ENCODE FOR URI" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-encode"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "ltrl" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ENCODE_FOR_URI ( ?arg_1 ) AS ?result)
+    }
+    """ ;
+.
+
+shsp-opr:EQUALS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns TRUE if term1 and term2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax [CONCEPTS]; produces a type error if the arguments are both literal but are not the same RDF term ; returns FALSE otherwise." ;
+  rdfs:label "SPARQL math operator RDFTERM-EQUAL" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-RDFterm-equal"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term 1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "term 2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT ?result
+    WHERE {
+      BIND ( ( ?arg_1 = ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-smb:EXCLAMATION_MARK
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the symbol '!' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL logical symbol not" ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:boolean ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT ?result
+    WHERE {
+      BIND ( ( ?arg_1 = FALSE ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:EXISTS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "There is a filter operator EXISTS that takes a graph pattern. EXISTS returns true/false depending on whether the pattern matches the dataset given the bindings in the current group graph pattern, the dataset and the active graph at this point in the query evaluation. No additional binding of variables occurs. The NOT EXISTS form translates into fn:not(EXISTS{...}). Returns true if pattern matches. Returns false otherwise. " ;
+  rdfs:label "SPARQL function EXISTS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-filter-exists"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:nodeKind sh:IRI ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_3 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 3 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( EXISTS { ?arg_1 ?arg_2 ?arg_3 } AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:FLOOR
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the largest (closest to positive infinity) number with no fractional part that is not greater than the value of arg. An error is raised if arg is not a numeric value. This function is the same as fn:numeric-floor for terms with a datatype from XDM." ;
+  rdfs:label "SPARQL function FLOOR" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-floor"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( FLOOR ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-opr:GREATER_THAN
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the operator symbol '>' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL logical operator greater than" ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:boolean ;
+      sh:name "left" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:datatype xsd:boolean ;
+      sh:name "right" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 > ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-opr:GREATER_THAN_OR_EQUALS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the operator symbol '>=' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL logical operator greater than or equals" ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:boolean ;
+      sh:name "left" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:datatype xsd:boolean ;
+      sh:name "right" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 >= ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:HOURS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the hours part of arg as an integer. This function corresponds to fn:hours-from-dateTime." ;
+  rdfs:label "SPARQL function HOURS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-hours"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:dateTime ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:integer ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( HOURS ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:IF
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The IF function form evaluates the first argument, interprets it as a effective boolean value, then returns the value of expression2 if the EBV is true, otherwise it returns the value of expression3. Only one of expression2 and expression3 is evaluated. If evaluating the first argument raises an error, then an error is raised for the evaluation of the IF expression." ;
+  rdfs:label "SPARQL function IF" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-if"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:boolean ;
+      sh:name "expression 1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "expression 2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_3 ;
+      sh:name "expression 3" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 3 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( ?arg_1, ?arg_2, ?arg_3 ) AS ?result)
+    }
+    """ ;
+.
+
+shsp-fnc:IN
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The IN operator tests whether the RDF term on the left-hand side is found in the values of list of expressions on the right-hand side. The test is done with = operator, which tests for the same value, as determined by the operator mapping." ;
+  rdfs:label "SPARQL function IN" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-in"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:name "rdfTerm" ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "expression" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 IN ( ?arg_2 ) ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:IRI
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The IRI function constructs an IRI by resolving the string argument (see RFC 3986 and RFC 3987 or any later RFC that superceeds RFC 3986 or RFC 3987). The IRI is resolved against the base IRI of the query and must result in an absolute IRI. The URI function is a synonym for IRI. If the function is passed an IRI, it returns the IRI unchanged. Passing any RDF term other than a simple literal, xsd:string or an IRI is an error. An implementation may normalize the IRI." ;
+  rdfs:label "SPARQL function IRI" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-iri"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IRI ( ?arg_1 ) AS ?result)
+    }
+    """ ;
+.
+
+shsp-fnc:ISBLANK
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns true if term is a blank node. Returns false otherwise." ;
+  rdfs:label "SPARQL function ISBLANK" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isBlank"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISBLANK ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:ISIRI
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns true if term is an IRI. Returns false otherwise. isURI is an alternate spelling for the isIRI operator." ;
+  rdfs:label "SPARQL function ISIRI" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isIRI"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:boolean ;  
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISIRI ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:ISLITERAL
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns true if term is a literal. Returns false otherwise." ;
+  rdfs:label "SPARQL function ISLITERAL" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isLiteral"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISLITERAL ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:ISNUMERIC
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns true if term is a numeric value. Returns false otherwise. term is numeric if it has an appropriate datatype (see the section Operand Data Types) and has a valid lexical form, making it a valid argument to functions and operators taking numeric arguments." ;
+  rdfs:label "SPARQL function ISNUMERIC" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isNumeric"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISNUMERIC ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:ISURI
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns true if term is an IRI. Returns false otherwise. isURI is an alternate spelling for the isIRI operator." ;
+  rdfs:label "SPARQL function ISURI" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isIRI"^^xsd:anyUri ;  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISURI ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:LANG
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the language tag of ltrl, if it has one. It returns '' if ltrl has no language tag. Note that the RDF data model does not include literals with an empty language tag." ;
+  rdfs:label "SPARQL function LANG" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-lang"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "ltrl" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:string ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( LANG ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:LANGMATCHES
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns true if language-tag (first argument) matches language-range (second argument) per the basic filtering scheme defined in [RFC4647] section 3.3.1. language-range is a basic language range per Matching of Language Tags [RFC4647] section 2.1. A language-range of '*' matches any non-empty language-tag string." ;
+  rdfs:label "SPARQL function LANGMATCHES" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-langMatches"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "language-tag" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "language-range" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( LANGMATCHES ( ?arg_1 , ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:LCASE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The LCASE function corresponds to the XPath fn:lower-case function. It returns a string literal whose lexical form is the lower case of the lexcial form of the argument." ;
+  rdfs:label "SPARQL function LCASE" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-lcase"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "str" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( LCASE ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:MD5
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the MD5 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits should be in lower case." ;
+  rdfs:label "SPARQL function MD5" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-md5"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( MD5 ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-opr:LESS_THAN
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the operator symbol '<' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL logical operator less than" ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:boolean ;
+      sh:name "left" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:datatype xsd:boolean ;
+      sh:name "right" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 < ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-opr:LESS_THAN_OR_EQUALS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the operator symbol '<=' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL logical operator less than or equals" ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:boolean ;
+      sh:name "left" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:datatype xsd:boolean ;
+      sh:name "right" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 <= ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:MINUTES
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the minutes part of arg as an integer. This function corresponds to fn:minutes-from-dateTime." ;
+  rdfs:label "SPARQL function MINUTES" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-minutes"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:dateTime ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:integer ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( MINUTES ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:MONTH
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the month part of arg as an integer. This function corresponds to fn:month-from-dateTime." ;
+  rdfs:label "SPARQL function MONTH" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-month"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:dateTime ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:integer ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( MONTH ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-opr:MULTIPLY
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the operator symbol '*' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL math operator multiply" ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+  ]  ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+  ]  ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE { 
+      BIND ( ( ?arg_1 * ?arg_2 ) AS ?result ) 
+    }
+    """ ;
+.
+
+shsp-fnc:NOT_EXISTS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "There is a filter operator EXISTS that takes a graph pattern. EXISTS returns true/false depending on whether the pattern matches the dataset given the bindings in the current group graph pattern, the dataset and the active graph at this point in the query evaluation. No additional binding of variables occurs. The NOT EXISTS form translates into fn:not(EXISTS{...}). Returns false if pattern matches. Returns true otherwise. " ;
+  rdfs:label "SPARQL function NOT EXISTS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-filter-exists"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:nodeKind sh:IRI ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_3 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 3 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( NOT EXISTS { ?arg_1 ?arg_2 ?arg_3 } AS ?result )
+    }
+    """ ;
+.
+
+shsp-opr:NOT_EQUALS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns TRUE if term1 and term2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax [CONCEPTS]; produces a type error if the arguments are both literal but are not the same RDF term ; returns FALSE otherwise." ;
+  rdfs:label "SPARQL math operator RDFTERM-EQUAL" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-RDFterm-equal"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term 1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "term 2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT ?result
+    WHERE {
+      BIND ( ( ?arg_1 != ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:NOT_IN
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The NOT IN operator tests whether the RDF term on the left-hand side is not found in the values of list of expressions on the right-hand side. The test is done with '!=' operator, which tests for not the same value, as determined by the operator mapping." ;
+  rdfs:label "SPARQL function NOT IN" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-not-in"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "rdfTerm" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "expression" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 NOT IN ( ?arg_2, ?arg_3 ) ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:NOW
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns an XSD dateTime value for the current query execution. All calls to this function in any one query execution must return the same value. The exact moment returned is not specified." ;
+  rdfs:label "SPARQL function NOW" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-now"^^xsd:anyUri ;
+  sh:returnType xsd:dateTime ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( NOW ( ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-smb:OR
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns a logical OR of left and right. Note that logical-or operates on the effective boolean value of its arguments." ;
+  rdfs:label "SPARQL logical function LOGICAL-OR" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-logical-or"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:boolean ;
+      sh:name "left" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:datatype xsd:boolean ;
+      sh:name "right" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 || ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:RAND
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns a pseudo-random number between 0 (inclusive) and 1.0e0 (exclusive). Different numbers can be produced every time this function is invoked. Numbers should be produced with approximately equal probability." ;
+  rdfs:label "SPARQL function RAND" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#idp2130040"^^xsd:anyUri ;
+  sh:returnType xsd:double ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( RAND ( ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:REGEX
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Invokes the XPath fn:matches function to match text against a regular expression pattern. The regular expression language is defined in XQuery 1.0 and XPath 2.0 Functions and Operators section 7.6.1 Regular Expression Syntax [FUNCOP]."^^xsd:string ;
+  rdfs:label "SPARQL function REGEX"^^xsd:string ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-regex"^^xsd:anyUri ;
+  sh:parameter [ 
+      sh:path shsp:arg_1 ; 
+      sh:name "text"^^xsd:string ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ]  ;
+  sh:parameter [ 
+      sh:path shsp:arg_2 ; 
+      sh:name "pattern"^^xsd:string ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ]  ;
+  sh:parameter [ 
+      sh:path shsp:arg_3 ; 
+      sh:name "flags"^^xsd:string ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 3 ;
+    ]  ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( BOUND ( ?arg_3 ), REGEX ( ?arg_1 , ?arg_2, ?arg_3 ), REGEX ( ?arg_1 , ?arg_2 ) ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:REPLACE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The REPLACE function corresponds to the XPath fn:replace function. It replaces each non-overlapping occurrence of the regular expression pattern with the replacement string. Regular expession matching may involve modifier flags. See REGEX." ;
+  rdfs:label "SPARQL function REPLACE" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-replace"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "pattern" ;   
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_3 ;
+      sh:name "replacement" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 3 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_4 ;
+      sh:name "flags" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 4 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( BOUND ( ?arg_4 ), REPLACE ( ?arg_1 , ?arg_2, ?arg_3, ?arg_4 ), REPLACE ( ?arg_1 , ?arg_2, ?arg_3 ) ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:ROUND
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the number with no fractional part that is closest to the argument. If there are two such numbers, then the one that is closest to positive infinity is returned. An error is raised if arg is not a numeric value. This function is the same as fn:numeric-round for terms with a datatype from XDM." ;
+  rdfs:label "SPARQL function ROUND" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-round"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ROUND ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:SAMETERM
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns TRUE if term1 and term2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax [CONCEPTS]; returns FALSE otherwise." ;
+  rdfs:label "SPARQL function SAMETERM" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sameTerm"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "term 1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "term 2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """ 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SAMETERM ( ?arg_1 , ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:SECONDS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the seconds part of arg as an integer. This function corresponds to fn:seconds-from-dateTime." ;
+  rdfs:label "SPARQL function SECONDS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-seconds"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:dateTime ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:integer ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SECONDS ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:SHA1
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the SHA1 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits should be in lower case." ;
+  rdfs:label "SPARQL function SHA1" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sha1"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SHA1 ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:SHA256
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the SHA256 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits should be in lower case." ;
+  rdfs:label "SPARQL function SHA256" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sha256"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SHA256 ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:SHA384
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the SHA384 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits should be in lower case." ;
+  rdfs:label "SPARQL function SHA384" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sha384"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SHA384 ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:SHA512
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the SHA512 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits should be in lower case." ;
+  rdfs:label "SPARQL function SHA512" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sha512"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SHA512 ( ?arg_1 ) AS ?result)
+    }
+    """ ;
+.
+
+shsp-fnc:STR
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the lexical form of ltrl (a literal); returns the codepoint representation of rsrc (an IRI). This is useful for examining parts of an IRI, for instance, the host-name." ;
+  rdfs:label "SPARQL function STR" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-str"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "ltrl_or_rsrc" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:string ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STR ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:STRAFTER
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The STRAFTER function corresponds to the XPath fn:substring-after function. The arguments must be argument compatible otherwise an error is raised. For compatible arguments, if the lexical part of the second argument occurs as a substring of the lexical part of the first argument, the function returns a literal of the same kind as the first argument arg1 (simple literal, plain literal same language tag, xsd:string). The lexical form of the result is the substring of the lexcial form of arg1 that follows the first occurrence of the lexical form of arg2. If the lexical form of arg2 is the empty string, this is considered to be a match and the lexical form of the result is the lexical form of arg1. If there is no such occurrence, an empty simple literal is returned." ;
+  rdfs:label "SPARQL function STRAFTER" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strafter"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "arg2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRAFTER ( ?arg_1 , ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:STRBEFORE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The STRBEFORE function corresponds to the XPath fn:substring-before function. The arguments must be argument compatible otherwise an error is raised. For compatible arguments, if the lexical part of the second argument occurs as a substring of the lexical part of the first argument, the function returns a literal of the same kind as the first argument arg1 (simple literal, plain literal same language tag, xsd:string). The lexical form of the result is the substring of the lexical form of arg1 that precedes the first occurrence of the lexical form of arg2. If the lexical form of arg2 is the empty string, this is considered to be a match and the lexical form of the result is the empty string. If there is no such occurrence, an empty simple literal is returned." ;
+  rdfs:label "SPARQL function STRBEFORE" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strbefore"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "arg2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRBEFORE ( ?arg_1 , ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:STRDT
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The STRDT function constructs a literal with lexical form and type as specified by the arguments." ;
+  rdfs:label "SPARQL function STRDT" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strdt"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "lexicalForm" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "datatypeIRI" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRDT ( ?arg_1, ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:STRENDS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The STRENDS function corresponds to the XPath fn:ends-with function. The arguments must be argument compatible otherwise an error is raised. For such input pairs, the function returns true if the lexical form of arg1 ends with the lexical form of arg2, otherwise it returns false." ;
+  rdfs:label "SPARQL function STRENDS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strends"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "arg2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRENDS ( ?arg_1 , ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:STRLANG
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The STRLANG function constructs a literal with lexical form and language tag as specified by the arguments." ;
+  rdfs:label "SPARQL function STRLANG" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strlang"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "lexicalForm" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "langTag" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType rdf:langString ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRLANG ( ?arg_1, ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:STRLEN
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The strlen function corresponds to the XPath fn:string-length function and returns an xsd:integer equal to the length in characters of the lexical form of the literal." ;
+  rdfs:label "SPARQL function STRLEN" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strlen"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "str" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:integer ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRLEN ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:STRSTARTS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The STRSTARTS function corresponds to the XPath fn:starts-with function. The arguments must be argument compatible otherwise an error is raised. For such input pairs, the function returns true if the lexical form of arg1 starts with the lexical form of arg2, otherwise it returns false." ;
+  rdfs:label "SPARQL function STRSTARTS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strstarts"^^xsd:anyUri ;  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "arg1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:name "arg2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRSTARTS ( ?arg_1 , ?arg_2) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:STRUUID
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Return a string that is the scheme specific part of UUID. That is, as a simple literal, the result of generating a UUID, converting to a simple literal and removing the initial urn:uuid:." ;
+  rdfs:label "SPARQL function STRUUID" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-struuid"^^xsd:anyUri ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRUUID ( ) AS ?result)
+    }
+    """ ;
+.
+
+shsp-fnc:SUBSTR
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The substr function corresponds to the XPath fn:substring function and returns a literal of the same kind (simple literal, literal with language tag, xsd:string typed literal) as the source input parameter but with a lexical form formed from the substring of the lexcial form of the source. The arguments startingLoc and length may be derived types of xsd:integer. The index of the first character in a strings is 1." ;
+  rdfs:label "SPARQL function SUBSTR" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-substr"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "source" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:datatype xsd:integer ;
+      sh:name "startingLoc" ;     
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:parameter [
+      sh:path shsp:arg_3 ;
+      sh:datatype xsd:integer ;
+      sh:name "length" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 3 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( BOUND ( ?arg_3 ), SUBSTR ( ?arg_1 , ?arg_2, ?arg_3 ), SUBSTR ( ?arg_1 , ?arg_2 ) ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-opr:SUBTRACT
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the operator symbol '-' which is used with SPARQL functions." ;
+  rdfs:label "SPARQL math operator subtract" ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+  ]  ;
+  sh:parameter [
+      sh:path shsp:arg_2 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+  ]  ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE { 
+      BIND ( ( ?arg_1 - ?arg_2 ) AS ?result ) 
+    }
+    """ ;
+.
+
+shsp-fnc:TIMEZONE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the timezone part of arg as an xsd:dayTimeDuration. Raises an error if there is no timezone. This function corresponds to fn:timezone-from-dateTime except for the treatment of literals with no timezone." ;
+  rdfs:label "SPARQL function TIMEZONE" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-timezone"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:dateTime ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:dayTimeDuration ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( TIMEZONE ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:TZ
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the timezone part of arg as a simple literal. Returns the empty string if there is no timezone." ;
+  rdfs:label "SPARQL function TZ" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-tz"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:dateTime ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( TZ ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:UCASE
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The UCASE function corresponds to the XPath fn:upper-case function. It returns a string literal whose lexical form is the upper case of the lexcial form of the argument." ;
+  rdfs:label "SPARQL function UCASE" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-ucase"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:name "str" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( UCASE ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:UNDEF
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "A function to represent the keyword UNDEF, which is an empty variable used in the function VALUES." ;
+  rdfs:label "SPARQL function UNDEF" ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+    }
+    """ ;
+.
+
+shsp-fnc:URI
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The IRI function constructs an IRI by resolving the string argument (see RFC 3986 and RFC 3987 or any later RFC that superceeds RFC 3986 or RFC 3987). The IRI is resolved against the base IRI of the query and must result in an absolute IRI. The URI function is a synonym for IRI. If the function is passed an IRI, it returns the IRI unchanged. Passing any RDF term other than a simple literal, xsd:string or an IRI is an error. An implementation may normalize the IRI." ;
+  rdfs:label "SPARQL function URI" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-iri"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( URI ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:UUID
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Return a fresh IRI from the UUID URN scheme. Each call of UUID() returns a different UUID. It must not be the 'nil' UUID (all zeroes). The variant and version of the UUID is implementation dependent." ;
+  rdfs:label "SPARQL function UUID" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-uuid"^^xsd:anyUri ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( UUID ( ) AS ?result )
+    }
+    """ ;
+.
+
+shsp-fnc:YEAR
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the year part of arg as an integer. This function corresponds to fn:year-from-dateTime." ;
+  rdfs:label "SPARQL function YEAR" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-year"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path shsp:arg_1 ;
+      sh:datatype xsd:dateTime ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:returnType xsd:integer ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( YEAR ( ?arg_1 ) AS ?result )
+    }
+    """ ;
+.
