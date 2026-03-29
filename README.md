@@ -20,3 +20,21 @@ The ontology is intended to help users **standardize SPARQL queries within SHACL
 ---
 
 ## Repository Structure
+shacl-sparql/ <-- root
+├── index.html <-- ReSpec human-readable documentation
+├── LICENSE <-- CC BY-NC 4.0 license file
+├── README.md <-- this file
+├── data/ <-- RDF/TTL files
+  ├── shacl-sparql ontology.ttl <-- SHACL triple rules
+  └── example-data.ttl 
+
+## License
+
+This repository is licensed under the Creative Commons Attribution–NonCommercial 4.0 International License (CC BY-NC 4.0).
+You may copy, distribute, and adapt this work for non-commercial purposes, with proper attribution. Commercial use requires prior permission from the authors. See LICENSE
+ for full details.
+
+## Citation
+If you use this repository in research or projects, please cite:
+Miltiadis Gkatzios. (2026). SHACL-SPARQL Functions Ontology. 
+https://miltiadisgkatzios.github.io/shacl-sparql/
