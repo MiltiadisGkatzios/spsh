@@ -1,27 +1,1062 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>My Personal Spec</title>
-    <!-- Neutral, non-W3C ReSpec -->
-    <script src="https://www.w3.org/Tools/respec/respec" class="remove"></script>
-    <script class="remove">
-      var respecConfig = {
-        specStatus: "unofficial", // No W3C connotations
-        shortName: "my-personal-spec",
-        editors: [{ name: "Miltos Gkatzios" }],
-        publishDate: "2025-03-23",
-      };
-    </script>
-  </head>
-  <body>
-    <section id="abstract">
-      This is my personal spec project.
-    </section>
 
-    <section>
-      <h2>Introduction</h2>
-      <p>Welcome to my specification document.</p>
-    </section>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <title>SH - SP Documentation</title>
+  <script
+  src="https://www.w3.org/Tools/respec/respec-w3c"
+  class="remove"
+  defer
+  ></script>
+  <script class="remove">
+    var respecConfig = {
+      specStatus: "unofficial",
+      editors: [{ name: "Miltos Gkatzios", url: "https://www.linkedin.com/in/miltos-gkat/" }],
+      github: "https://github.com/MiltiadisGkatzios/sh-sp/",
+      shortName: "sh-sp",
+      xref: "web-platform",
+      maxTocLevel: 2,
+      license: "document",
+    };
+  </script>
+  <style>
+    .example-block                  { padding: 8px 8px; margin: 8px 0 ; font-family: monospace; white-space: pre-wrap; word-wrap: break-word; overflow-x: auto; border-radius: 0; position: relative; }
+    .example-block::before          { display: inline-block; font-weight: bold; color: grey; margin-bottom: 4px; padding-left: 0; }
+    .example-block code             { white-space: pre-wrap; display: block; }
+
+    .example-data                   { background: #fffde7; border-left: 6px solid #f9a825; }
+    .example-data::before           { content: "Data graph"; }
+    .example-inferred-data          { background: #fff3e0; border-left: 6px solid #fb8c00; }
+    .example-inferred-data::before  { content: "Inferred data graph"; }
+    .example-ontology               { background: #e0e0e0; border-left: 6px solid #9e9e9e; }
+    .example-ontology::before       { content: "SHACL-SPARQL graph"; }
+    .example-shapes                 { background: #e8f5e9; border-left: 6px solid #2e7d32; }
+    .example-shapes::before         { content: "Shapes graph"; }
+    .example-sparql                 { background: #e3f2fd; border-left: 6px solid #2196f3; }
+    .example-sparql::before         { content: "SPARQL query"; }
+
+    .highlight-focus-node           { color: green; font-weight: bold; }
+    .highlight-failed-focus-node    { color: red; font-weight: bold; }
+
+    .metadata-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .metadata-table th,
+    .metadata-table td { padding: 8px 12px; text-align: left; }
+    .metadata-table th { font-weight: bold; border-bottom: 2px solid #000;}
+    .metadata-table tbody tr { border-bottom: 1px solid #ddd; }
+    .metadata-table .col-left { width: 15%; }
+    .metadata-table .col-mid { width: 15%; }
+    .metadata-table .col-right { width: 70%; }
+    .metadata-table a { text-decoration: none; color: inherit; }
+    .metadata-table a:hover { text-decoration: underline; }
+
+    .sparql-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .sparql-table th,
+    .sparql-table td { padding: 8px 12px; text-align: left; }
+    .sparql-table th { font-weight: bold; border-bottom: 2px solid #000;}   
+    .sparql-table td:first-child,
+    .sparql-table th:first-child { text-align: right; padding-right: 4px; }
+    .sparql-table tbody tr { border-bottom: 1px solid #ddd; }
+    .sparql-table .col-asterisk { width: 4ch; }
+    .sparql-table .col-left { width: 50%; }
+    .sparql-table .col-right { width: 50%; }
+    .sparql-table a { text-decoration: none; color: inherit; }
+    .sparql-table a:hover { text-decoration: underline; }
+
+    .sparql-notes { margin-top: 10px; font-size: 0.9em; }
+    .note-ast { color: red; font-weight: bold; }
+  </style>
+</head>
+
+<section id="abstract">
+  <p>This document presents a preliminary draft of a linked data ontology that formalizes SPARQL 1.1 functions as instances of <code>sh:SPARQLFunction</code>, based on the <a href="https://www.w3.org/TR/shacl-af/" target="_blank">SHACL Advanced Features</a>. Each SPARQL function, mathematical operation, and symbol is uniquely instantiated and described using labels, definitions, and references from the <a href="https://www.w3.org/TR/sparql11-query/" target="_blank"> SPARQL 1.1 Query Language.</a></p>
+  <p>The ontology is intended for users who aim to standardize and structure SPARQL queries within <code>sh:TripleRule</code> instances. By providing predefined, standardized function instances, the need for hard-coded SPARQL queries is minimized, enhancing interoperability, reusability, machine readability, and the universality of self-descriptive queries in SHACL.</p>
+</section>
+
+<section id="sotd">
+  <p>This document is an informal work in progress and is not a normative specification. It was created as part of exploratory work and is published for documentation and general reference purposes.</p>
+  <p>The content may evolve over time and may be updated, modified, or reorganised without notice. The examples and explanations provided here illustrate possible approaches and should not be interpreted as defining a standard or mandatory implementation.</p>
+  <p>This document is publicly available through GitHub for convenience and transparency.</p>
+  <p><strong>Copyright © 2026 the document editors/authors.</strong> 
+  This document is licensed under the Creative Commons Attribution–NonCommercial 4.0 International License (CC BY-NC 4.0). 
+  You may copy, distribute, and adapt this work for non-commercial purposes provided that appropriate attribution is given. 
+  Commercial use requires prior permission from the authors.</p>
+</section>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <p>This document defines a linked data ontology that formalizes SPARQL 1.1 functions as instances of <code>sh:SPARQLFunction</code> within the SHACL Advanced Features framework.</p>
+  <p>The ontology ensures interoperability and reusability by providing a consistent and machine-readable way to represent SPARQL functions as part of SHACL rule-based triple generation.</p>
+  <p>This spec is intended for users working with SHACL, SPARQL, or linked data systems who seek to standardize SPARQL query usage within SHACL rules.</p>
+  <section id="limitations">
+    <h3>Limitations / Scope</h3>
+    <ul>
+      <li>This ontology formalizes existing SPARQL 1.1 functions, operators, and symbols and does not introduce new SPARQL constructs.</li>
+      <li>It requires familiarity with both SHACL, SHACL AF, and SPARQL 1.1.</li>
+      <li>The scope of this document is limited to the SPARQL functions, operators, and symbols listed in Chapter X. Not all of these are illustrated through use cases. The examples focus on a representative subset.</li>
+    </ul>
+  </section>
+  <section id="conventions">
+    <h3>Conventions</h3>
+    <p>The table below indicates the full list of namespaces and prefixes used in this document.</p>
+    <table style="border: 1px solid black; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid black; padding: 8px;">Prefix</th>
+          <th style="border: 1px solid black; padding: 8px;">Namespace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">ex</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="http://example.com/">http://example.com/</a></td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">owl</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="http://www.w3.org/2002/07/owl#">http://www.w3.org/2002/07/owl#</a></td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">rdf</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a></td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">rdfs</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="http://www.w3.org/2000/01/rdf-schema#">http://www.w3.org/2000/01/rdf-schema#</a></td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">sh</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="http://www.w3.org/ns/shacl#">http://www.w3.org/ns/shacl#</a></td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">shsp</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="https://github.com/MiltiadisGkatzios/shsp#">https://github.com/MiltiadisGkatzios/shsp#</a></td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">shsp-fnc</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="https://github.com/MiltiadisGkatzios/shsp#">https://github.com/MiltiadisGkatzios/shsp/function#</a></td>
+        </tr>      
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">shsp-opr</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="https://github.com/MiltiadisGkatzios/shsp#">https://github.com/MiltiadisGkatzios/shsp/operator#</a></td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">shsp-smb</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="https://github.com/MiltiadisGkatzios/shsp#">https://github.com/MiltiadisGkatzios/shsp/symbol#</a></td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px;">xsd</td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="http://www.w3.org/2001/XMLSchema#">http://www.w3.org/2001/XMLSchema#</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>For readability, the following color-coded boxes are used in the examples throughout this document:</p>
+    <div class="example-block example-ontology">
+# This block contains definitions from the SHACL-SPARQL ontology, typically written in Turtle format.
+    </div>
+    <div class="example-block example-shapes">
+# This box represents the input shapes graph, typically written in Turtle format.
+
+# The shapes graph may contain among others instances of sh:Shape, sh:Rule and the instances of the sh:SPARQLFunction which are defined in the SH - SP ontology.
+    </div>
+    <div class="example-block example-data">
+# This box representes the input data graph, typically written in Turtle format.
+
+# Elements highlighted in <span class="highlight-focus-node">green</span>, are focus nodes.
+# Elements highlighted in <span class="highlight-failed-focus-node">red</span>, are focus nodes that fail inference for any reason.
+    </div>
+    <div class="example-block example-inferred-data">
+# This box representes the output data graph (inferenced data), typically written in Turtle format.
+    </div>
+    <div class="example-block example-sparql">
+# This block represent a potential SPARQL representation of the shapes graph, typically written in the SPARQL language.
+    </div>
+  </section>
+  <section id="conformative">
+    <h3>Conformance</h3>
+    <p>This document is entirely non-normative. It does not define a specification, standard, or mandatory implementation.</p>
+    <p>The concepts, examples, and modelling patterns described here are provided for explanatory and illustrative purposes only.</p>
+  </section>
+</section>
+
+<section id="chapter-2" lang="en">
+  <h2>SH - SP ontology</h2>
+  <p> This ontology is <strong>instance-centric</strong> and intentionally does <em>not</em> define a domain class model or class hierarchy. Each resource described in this ontology is a concrete representation of a SPARQL 1.1 construct (function, operator or symbol) and it is modeled as an
+    instance of <code>sh:SPARQLFunction</code> from the <a href="https://www.w3.org/TR/shacl-af/" target="_blank" rel="noopener noreferrer">SHACL Advanced Features</a> framework.</p>
+  <html>
+    <head>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script>
+        mermaid.initialize({ startOnLoad: true });
+      </script>
+    </head>
+    <body>
+    <div style="position: relative; width: 100%; height: 200px;">
+      <div class="mermaid" style="width: 100%; height: 100%;">
+      classDiagram
+        direction LR
+        class NodeExpression {
+          -SPARQLFunction : args 
+        }
+        class TripleRule {
+          -subject : NodeExpression  
+          -predicate : NodeExpression
+          -object : NodeExpression
+        }
+        class NodeShape {
+          -rule : TripleRule
+        }
+        TripleRule "0" --> "1" NodeExpression : subject
+        TripleRule "0" --> "1" NodeExpression : predicate
+        TripleRule "0" --> "1" NodeExpression : object
+        NodeShape "0" --> "1" TripleRule : rule
+      </div>
+      <div style="
+            position: absolute;
+            top: 67px; left: 555px;  /* adjust manually */
+            width: 180px; height: 50px;
+            border: 3px solid red;
+            border-radius: 50%;
+            pointer-events: none;">
+      </div>
+    </div>
+    <p>The diagram above shows how Node Shapes, Triple Rules, and Node Expressions are used to generate new data. It omits other elements for clarity and focuses specifically on the part relevant to the SH-SP ontology.</p>
+    <p>The values of <code>sh:subject</code>, <code>sh:predicate</code>, and <code>sh:object</code> are Node Expressions. As it is highlighted, node expressions might be instances of <code>sh:SPARQLFunction</code> such as the ones found in the SH-SP ontology.</p>
+    </body>
+  </html>
+  <h3>Modeling approach</h3>
+  <p>Each instance in the SH - SP ontology represents uniquely a SPARQL function, operator or symbol found in the <a href="https://www.w3.org/TR/sparql11-query/" target="_blank" rel="noopener noreferrer"> SPARQL 1.1 Query language</a>. There is a consistent set of metadata properties that describe:</p>
+  <ul>
+    <li>basic identity (type, label, comment, seeAlso),</li>
+    <li>parameter metadata (order, name, path, datatype, optional),</li>
+    <li>execution-related information (prefixes, return type, and a <code>sh:select</code> BIND query).</li>
+  </ul>
+  <p>All instances of SPARQL functions are with capital letters for consistency with SPARQL documentation.</p>
+  <h3>Namespaces</h3>
+  <p>Three primary namespaces are used to separate the functions, operators and symbols to improve discoverability: </p>
+  <ul>
+    <li><code>shsp-fnc</code> — namespace for SPARQL <strong>functions</strong> (eg. <code>shsp-fnc:STRSTARTS</code>).</li>
+    <li><code>shsp-opr</code> — namespace for SPARQL <strong>operators</strong> (eg. <code>shsp-opr:ADD</code>).</li>
+    <li><code>shsp-smb</code> — namespace for SPARQL <strong>symbols</strong> (eg. <code>shsp-smb:EXLAMATION_MARK</code>).</li>
+  </ul>
+  <p>This split is organizational only: functions, operators and symbols use the same overall instance pattern and properties.</p>
+  <h3>SPARQL Function structure</h3>
+  <p> Each instance of <code>sh:SPARQLFunction</code> follows this structure: </p>
+  <table class="metadata-table"> 
+    <colgroup>
+      <col class="col-left">
+      <col class="col-mid">
+      <col class="col-right">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Cardinality</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>rdf:type</code></td>
+        <td>1..1</td>
+        <td><code>sh:SPARQLFunction</code></td>
+      </tr>
+      <tr>
+        <td><code>rdfs:label</code></td>
+        <td>1..1</td>
+        <td>Human readable name, e.g. <i>"SPARQL Function STRSTARTS"</i>.</td>
+      </tr>
+      <tr>
+        <td><code>rdfs:comment</code></td>
+        <td>1..1</td>
+        <td>Description taken from the W3C SPARQL 1.1 specification (<a href="https://www.w3.org/TR/sparql11-query/" target="_blank" rel="noopener noreferrer">SPARQL 1.1 Query</a>).</td>
+      </tr>
+      <tr>
+        <td><code>rdfs:seeAlso</code></td>
+        <td>1..1</td>
+        <td>URI pointing to the W3C SPARQL 1.1 specification (<a href="https://www.w3.org/TR/sparql11-query/" target="_blank" rel="noopener noreferrer">SPARQL 1.1 Query.</a>).</td>
+      </tr>
+      <tr>
+        <td><code>sh:parameter</code></td>
+        <td>0..*</td>
+        <td>List of parameter descriptions (detailed below). Quantity of parameters depends on each SPARQL function.</td>
+      </tr>
+      <tr>
+        <td><code>sh:returnType</code></td>
+        <td>0..1</td>
+        <td>Expected type of the result (e.g. <code>xsd:boolean</code>), when applicable.</td>
+      </tr>
+      <tr>
+        <td><code>sh:select</code></td>
+        <td>1..1</td>
+        <td>A SPARQL query that represents the SPARQL function's behavior.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>SPARQL Function Parameter structure</h3>
+  <p> Each parameter of a SPARQL Function is represented as a SHACL parameter node and uses the following properties:</p>
+  <table class="metadata-table"> 
+    <colgroup>
+      <col class="col-left">
+      <col class="col-mid">
+      <col class="col-right">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Cardinality</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>sh:path</code></td>
+        <td>1..1</td>
+        <td>The argument name in the function's query, using the convention <code>shsp:arg_N</code> (e.g. <code>?arg_1</code>).</td>
+      </tr>
+      <tr>
+        <td><code>sh:datatype</code></td>
+        <td>0..1</td>
+        <td>The expected RDF datatype for the parameter (e.g. <code>xsd:string</code>).</td>
+      </tr>
+      <tr>
+        <td><code>sh:name</code></td>
+        <td>0..1</td>
+        <td>The parameter name from the SPARQL spec, when provided.</td>
+      </tr>
+      <tr>
+        <td><code>sh:optional</code></td>
+        <td>0..1</td>
+        <td><code>True</code> if the parameter is optional according to SPARQL semantics.</td>
+      </tr>
+      <tr>
+        <td><code>sh:order</code></td>
+        <td>1..1</td>
+        <td>An integer indicating the parameter position (1-based).</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Example</h3>
+  <div class="example-block example-ontology">
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt; .
+@prefix shsp-fnc: &lt;http://example.org/shsp-fnc#&gt; .
+@prefix shsp: &lt;http://example.org/shsp#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+shsp-fnc:STRSTARTS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "The STRSTARTS function corresponds to the XPath fn:starts-with function. The arguments must be argument compatible otherwise an error is raised. For such input pairs, the function returns true if the lexical form of arg1 starts with the lexical form of arg2, otherwise it returns false." ;
+  rdfs:label "SPARQL function STRSTARTS" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strstarts"^^xsd:anyUri ;  
+  sh:parameter [
+    sh:path shsp:arg_1 ;
+    sh:name "arg1" ;
+    sh:optional "true"^^xsd:boolean ;
+    sh:order 1 ;
+  ] ;
+  sh:parameter [
+    sh:path shsp:arg_2 ;
+    sh:name "arg2" ;
+    sh:optional "true"^^xsd:boolean ;
+    sh:order 2 ;
+  ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE 
+    {
+      BIND ( STRSTARTS ( ?arg_1 , ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+  </div>
+  <h3>SPARQL Functions</h3>
+  <p>The following SPARQL 1.1 functions, operators, and symbols are represented as instances of <code>sh:SPARQLFunction</code> in this ontology. Their behaviour and semantics follow the SPARQL 1.1 specification and are not redefined here.</p>
+  <h4 id="sparql-functions-list">SPARQL Functions</h4>
+  <table class="sparql-table"> 
+    <colgroup>
+      <col class="col-asterisk">
+      <col class="col-left">
+      <col class="col-right">
+    </colgroup>
+    <thead>
+      <tr>
+        <th></th>
+        <th>SH - SP</th>
+        <th>SPARQL Function</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ABS"><code>shsp-fnc:ABS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-abs"><code>ABS</code> <span style="font-size:0.85em">( numeric term )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#BNODE"><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( )</span><br><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-bnode"><code>BNODE</code> <span style="font-size:0.85em">( )</span><br><code>BNODE</code> <span style="font-size:0.85em">( simple literal )</span><br><code>BNODE</code> <span style="font-size:0.85em">( xsd:string )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#BOUND"><code>shsp-fnc:BOUND</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-bound"><code>BOUND</code> <span style="font-size:0.85em">( variable var )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#CEIL"><code>shsp-fnc:CEIL</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-ceil"><code>CEIL</code> <span style="font-size:0.85em">( numeric term )</span></a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">*</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#COALESCE"><code>shsp-fnc:COALESCE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-coalesce"><code>COALESCE</code> <span style="font-size:0.85em">( expression, ... )</span></a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">*</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#CONCAT"><code>shsp-fnc:CONCAT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-concat"><code>CONCAT</code> <span style="font-size:0.85em">( string literal ltrl1 ... string literal ltrln )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#CONTAINS"><code>shsp-fnc:CONTAINS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-contains"><code>CONTAINS</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#DATATYPE"><code>shsp-fnc:DATATYPE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-datatype"><code>DATATYPE</code> <span style="font-size:0.85em">( literal literal )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#DAY"><code>shsp-fnc:DAY</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-day"><code>DAY</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ENCODE_FOR_URI"><code>shsp-fnc:ENCODE_FOR_URI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-encode"><code>DAY</code> <span style="font-size:0.85em">( string literal ltrl )</span></a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">***</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#EXISTS"><code>shsp-fnc:EXISTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-filter-exists"><code>EXISTS</code> <span style="font-size:0.85em"> { pattern }</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#FLOOR"><code>shsp-fnc:FLOOR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-floor"><code>FLOOR</code> <span style="font-size:0.85em">( numeric term )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#HOURS"><code>shsp-fnc:HOURS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-floor"><code>HOURS</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#IF"><code>shsp-fnc:IF</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-if"><code>IF</code> <span style="font-size:0.85em">( expression1, expression2, expression3 )</span></a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">**</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#IN"><code>shsp-fnc:IN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-in"><code>IN</code> <span style="font-size:0.85em">( expression, ... )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#IRI"><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-iri"><code>IRI</code> <span style="font-size:0.85em">( simple literal )</span><br><code>IRI</code> <span style="font-size:0.85em">( xsd:string )</span><br><code>IRI</code> <span style="font-size:0.85em">( iri )</span><br><code>URI</code> <span style="font-size:0.85em">( simple literal )</span><br><code>URI</code> <span style="font-size:0.85em">( xsd:string )</span><br><code>URI</code> <span style="font-size:0.85em">( iri )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ISBLANK"><code>shsp-fnc:ISBLANK</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-isBlank"><code>ISBLANK</code> <span style="font-size:0.85em">( RDF term term )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ISIRI"><code>shsp-fnc:ISIRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:ISURI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-isIRI"><code>ISIRI</code> <span style="font-size:0.85em">( RDF term term )</span><br><code>ISURI</code> <span style="font-size:0.85em">( RDF term term )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ISLITERAL"><code>shsp-fnc:ISLITERAL</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-isLiteral"><code>ISLITERAL</code> <span style="font-size:0.85em">( RDF term term )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ISNUMERIC"><code>shsp-fnc:ISNUMERIC</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-isNumeric"><code>ISNUMERIC</code> <span style="font-size:0.85em">( RDF term term )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#LANG"><code>shsp-fnc:LANG</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-lang"><code>LANG</code> <span style="font-size:0.85em">( literal ltrl )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#LANGMATCHES"><code>shsp-fnc:LANGMATCHES</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-langMatches"><code>LANGMATCHES</code> <span style="font-size:0.85em">( simple literal language-tag, simple literal language-range )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#LCASE"><code>shsp-fnc:LCASE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-lcase"><code>LCASE</code> <span style="font-size:0.85em">( string literal str )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#MD5"><code>shsp-fnc:MD5</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:MD5</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-md5"><code>MD5</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>MD5</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#MINUTES"><code>shsp-fnc:MINUTES</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-minutes"><code>MINUTES</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#MONTH"><code>shsp-fnc:MONTH</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-month"><code>MONTH</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">***</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#NOT_EXISTS"><code>shsp-fnc:NOT_EXISTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-filter-exists"><code>NOT EXISTS</code> <span style="font-size:0.85em"> { pattern }</span></a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">**</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#NOT_IN"><code>shsp-fnc:NOT_IN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-not-in"><code>NOT IN</code> <span style="font-size:0.85em">( expression, ... )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#NOW"><code>shsp-fnc:NOW</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-now"><code>NOW</code> <span style="font-size:0.85em">( )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#RAND"><code>shsp-fnc:RAND</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#idp2130040"><code>RAND</code> <span style="font-size:0.85em">( )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#REGEX"><code>shsp-fnc:REGEX</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span><br><code>shsp-fnc:REGEX</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-regex"><code>REGEX</code> <span style="font-size:0.85em">( string literal text, simple literal pattern )</span><br><code>REGEX</code> <span style="font-size:0.85em">( string literal text, simple literal pattern, simple literal flags )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#REPLACE"><code>shsp-fnc:REPLACE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3)</span><br><code>shsp-fnc:REPLACE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 :arg_4 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-replace"><code>REPLACE</code> <span style="font-size:0.85em">( string literal arg, simple literal pattern, simple literal replacement )</span><br><code>REPLACE</code> <span style="font-size:0.85em">( string literal arg, simple literal pattern, simple literal replacement,  simple literal flags )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ROUND"><code>shsp-fnc:ROUND</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-round"><code>ROUND</code> <span style="font-size:0.85em">( numeric term )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SAMETERM"><code>shsp-fnc:SAMETERM</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-sameTerm"><code>SAMETERM</code> <span style="font-size:0.85em">( RDF term term1, RDF term term2 )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SECONDS"><code>shsp-fnc:SECONDS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-seconds"><code>SECONDS</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SHA1"><code>shsp-fnc:SHA1</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA1</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-sha1"><code>SHA1</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>SHA1</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SHA256"><code>shsp-fnc:SHA256</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA256</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-sha256"><code>SHA256</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>SHA256</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SHA384"><code>shsp-fnc:SHA384</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA384</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-sha384"><code>SHA384</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>SHA384</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SHA512"><code>shsp-fnc:SHA512</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA512</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-sha512"><code>SHA512</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>SHA512</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STR"><code>shsp-fnc:STR</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:STR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-str"><code>STR</code> <span style="font-size:0.85em">( literal ltrl )</span><br><code>STR</code> <span style="font-size:0.85em">( IRI rsrc )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRAFTER"><code>shsp-fnc:STRAFTER</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-strafter"><code>STRAFTER</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRBEFORE"><code>shsp-fnc:STRBEFORE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-strbefore"><code>STRBEFORE</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRDT"><code>shsp-fnc:STRDT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-strdt"><code>STRDT</code> <span style="font-size:0.85em">( simple literal lexicalForm, IRI datatypeIRI )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRENDS"><code>shsp-fnc:STRENDS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-strends"><code>STRENDS</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRLANG"><code>shsp-fnc:STRLANG</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-strlang"><code>STRLANG</code> <span style="font-size:0.85em">( simple literal lexicalForm, simple literal langTag )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRLEN"><code>shsp-fnc:STRLEN</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-strlen"><code>STRLEN</code> <span style="font-size:0.85em">( string literal str )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRSTARTS"><code>shsp-fnc:STRSTARTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-strstarts"><code>STRSTARTS</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRUUID"><code>shsp-fnc:STRUUID</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-struuid"><code>STRUUID</code> <span style="font-size:0.85em">( )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SUBSTR"><code>shsp-fnc:SUBSTR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span><br><code>shsp-fnc:SUBSTR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-substr"><code>SUBSTR</code> <span style="font-size:0.85em">( string literal source, xsd:integer startingLoc )</span><br><code>SUBSTR</code> <span style="font-size:0.85em">( string literal source, xsd:integer startingLoc, xsd:integer length )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#TIMEZONE"><code>shsp-fnc:TIMEZONE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-timezone"><code>TIMEZONE</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#TZ"><code>shsp-fnc:TZ</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-tz"><code>TZ</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#UCASE"><code>shsp-fnc:UCASE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-ucase"><code>UCASE</code> <span style="font-size:0.85em">( string literal str )</span></a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red;">****</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#UNDEF"><code>shsp-fnc:UNDEF</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#inline-data"><code>UNDEF</code> <span style="font-size:0.85em">( )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#UUID"><code>shsp-fnc:UUID</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-uuid"><code>UUID</code> <span style="font-size:0.85em">( )</span></a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#YEAR"><code>shsp-fnc:YEAR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-year"><code>YEAR</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="sparql-notes">
+    <p><span class="note-ast">*</span> SPARQL functions <code>CONCAT</code> and <code>COALESCE</code> expect a list of unknown parameters and therefore cannot be modeled in the same way as <code>sh:SPARQLFunction</code>. Consequently, two values are expected. For three or more values, nested <code>sh:SPARQLFunction</code> must be used, e.g. <code>[ shsp-fnc:COALESCE ( :arg_1, [ shsp-fnc:COALESCE ( :arg_2 :arg_3 ) ] ) ]</code>.</p>
+    <p><span class="note-ast">**</span> Similar to the SPARQL functions <code>CONCAT</code> and <code>COALESCE</code>, the SPARQL functions <code>IN</code> and <code>NOT IN</code> expect a list of unknown parameters and therefore cannot be modeled in the same way as <code>sh:SPARQLFunction</code>. Consequently, two values are expected, where the first represents the parameter to be evaluated. For more than one value in the list of <code>shsp-fnc:IN</code>, <code>shsp-smb:OR</code> can be used: <code>[ shsp-smb:OR ( [ shsp-fnc:IN (:arg_1 :arg_2 ) ] [ shsp-fnc:IN ( :arg_1 :arg_3 ) ] ) ]</code>. For more than one value in the list of <code>shsp-fnc:NOT_IN</code>, <code>shsp-smb:AND</code> can be used: <code>[ shsp-smb:AND ( [ shsp-fnc:NOT_IN (:arg_1 :arg_2 ) ] [ shsp-fnc:NOT_IN ( :arg_1 :arg_3 ) ] ) ]</code>.</p> 
+    <p><span class="note-ast">***</span> The SPARQL functions <code>EXISTS</code> and <code>NOT EXISTS</code> expect a pattern. Only simple patterns can be expressed using three parameters corresponding to a triple's subject, predicate, and object.</p>
+    <p><span class="note-ast">****</span> <code>UNDEF</code> is used in SPARQL in <code>VALUES</code> to represent an undefined value. Here it can be used  as a placeholder for the “undefined” value in SPARQL functions.</p>
+  </div>
+  <h4 id="sparql-functions-list">SPARQL Operators</h4>
+  <table class="sparql-table">   
+    <colgroup>
+      <col class="col-asterisk">
+      <col class="col-left">
+      <col class="col-right">
+    </colgroup>
+    <thead>
+      <tr>
+        <th></th>
+        <th>SH - SP</th>
+        <th>SPARQL Operator</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span style="color:red">*</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#ADD"><code>shsp-opr:ADD</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>+</strong> B</a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">*</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#DIVIDE"><code>shsp-opr:DIVIDE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>/</strong> B</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#EQUALS"><code>shsp-opr:EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>=</strong> B</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#GREATER_THAN"><code>shsp-opr:GREATER_THAN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>></strong> B</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#GREATER_THAN_OR_EQUALS"><code>shsp-opr:GREATER_THAN_OR_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>>=</strong> B</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#LESS_THAN"><code>shsp-opr:LESS_THAN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong><</strong> B</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#LESS_THAN_OR_EQUALS"><code>shsp-opr:LESS_THAN_OR_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong><=</strong> B</a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">*</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#MULTIPLY"><code>shsp-opr:MULTIPLY</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>*</strong> B</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#NOT_EQUALS"><code>shsp-opr:NOT_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>!=</strong> B</a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">*</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#SUBTRACT"><code>shsp-opr:SUBTRACT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>-</strong> B</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="sparql-notes">
+    <p><span class="note-ast">*</span> SPARQL allows multiple mathematical operators to appear consecutively. As the number of parameters is unknown, a series of nested functions is required. For example: <code> [ shsp-opr:ADD ( [ shsp-opr:ADD (:arg_1 :arg_2) ] :arg_3 ) ]</code>.</p>
+  </div>
+  <h4 id="sparql-functions-list">SPARQL Symbols</h4>
+  <table class="sparql-table">
+    <colgroup>
+      <col class="col-asterisk">
+      <col class="col-left">
+      <col class="col-right">
+    </colgroup>
+    <thead>
+      <tr>
+        <th></th>
+        <th>SH - SP</th>
+        <th>SPARQL Symbol</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span style="color:red">*</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/symbol#AND"><code>shsp-smb:AND</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-logical-and">left <strong>&&</strong> right</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/symbol#EXCLAMATION_MARK"><code>shsp-smb:EXCLAMATION_MARK</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping"><strong>!</strong></a></td>
+      </tr>
+      <tr>
+        <td><span style="color:red">*</span></td>
+        <td><a href="https://github.com/MiltiadisGkatzios/shsp/symbol#OR"><code>shsp-smb:OR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://www.w3.org/TR/sparql11-query/#func-logical-or">left <strong>||</strong> right</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="sparql-notes">
+    <p><span class="note-ast">*</span> SPARQL allows multiple logical operators ( <code>||</code> and <code>&amp;&amp;</code> ) to appear consecutively. As the number of parameters is unknown, a series of nested functions is required. For example: <code> [ shsp-smb:OR ( [ shsp-smb:OR ( :arg_1 :arg_2 ) ] :arg_3 ) ]</code>.</p>
+  </div>
+  <h3>Limitations</h3>
+  <p>The following limitations apply. To use the SPARQL functionalities listed below within <code>sh:rule</code>, it is recommended to use <code>sh:SPARQLRule</code>, which allows the definition of a full SPARQL query, rather than <code>sh:TripleRule</code>.</p>
+  <ul>
+    <li><code>OPTIONAL</code> (see <a href="https://www.w3.org/TR/sparql11-query/#optionals">SPARQL 1.1 Query Language – Section 6</a>) is not supported.</li>
+    <li>Matching alternative patterns (<code>UNION</code>) or negating patterns (<code>MINUS</code>) (see <a href="https://www.w3.org/TR/sparql11-query/#alternatives">Section 7</a> and <a href="https://www.w3.org/TR/sparql11-query/#negation">Section 8</a>) are not supported.</li>
+    <li>Property paths (see <a href="https://www.w3.org/TR/sparql11-query/#propertypaths">Section 9</a>) are not supported. When needed, SHACL property paths can be used instead.</li>
+    <li>Assignment functions (<code>BIND</code> and <code>VALUES</code>) (see <a href="https://www.w3.org/TR/sparql11-query/#assignment">Section 10</a>) are not supported. However, all functions behave as implicit <code>BIND</code> operations.</li>
+    <li><code>FILTER</code> is not supported.</li>
+    <li>Aggregation functions (see <a href="https://www.w3.org/TR/sparql11-query/#aggregates">Section 11</a>) and the associated aggregate algebra functions (see <a href="https://www.w3.org/TR/sparql11-query/#sparqlAlgebra">Section 18.5</a>) are not supported.</li>
+    <li>Solution sequences and modifiers (see <a href="https://www.w3.org/TR/sparql11-query/#solutionModifiers">Section 15</a>) are not supported.</li>
+    <li>SPARQL functions with a variable number of parameters (e.g., <code>COALESCE</code>) are modeled differently from the standard SPARQL structure. For limitations and implementation details, see the functions marked with <span style="color: red;">*</span> in <a href="#sparql-functions">Section 2.6 – SPARQL Functions</a>.</li>
+  </ul>
+  </section>
+
+  <section id="examples">
+    <h2>Examples</h2>
+    <p> This section demonstrates how the SHACL SPARQL ontology can be used inside <code>sh:TripleRule</code> constructs. 
+      <p> All instances of <code>sh:SPARQLFunction</code> in the SHACL-SPARQL ontology are straightforward and simple to understand for anyone familiar with the relevant standards:</p>
+      <ul>
+        <li> <a href="https://www.w3.org/TR/shacl/" target="_blank">SHACL</a> – for understanding the core SHACL concepts. </li>
+        <li> <a href="https://www.w3.org/TR/shacl-af/" target="_blank">SHACL Advanced Features</a> – for understanding <code>sh:Rule</code> and advanced SHACL constructs. </li>
+        <li> <a href="https://www.w3.org/TR/sparql11-query/" target="_blank">SPARQL 1.1</a> – for understanding SPARQL functions, queries, and their representations. </li>
+      </ul>
+
+      <p>SHACL Triple Rules allow new triples to be generated from existing data in a dataset. By defining rule-based logic within a <code>NodeShape</code>, it is possible to derive additional information, compute new values, or materialise relationships that are implicitly present in the data.</p>
+
+      <p>In this approach, a <code>NodeShape</code> targets a set of focus nodes of interest. The associated rules (<code>sh:rule</code>) are then evaluated for each focus node, and when the rule conditions are satisfied, new triples can be generated.</p>
+
+      <p>SHACL supports different types of rules for this purpose. The <code>sh:TripleRule</code> provides a structured way of creating triples by explicitly defining the subject, predicate, and object of the generated statement. In contrast, <code>sh:SPARQLRule</code> offers more flexibility, allowing arbitrary SPARQL <code>CONSTRUCT</code> queries to generate new triples.</p>
+
+      <p>In the examples below, the focus is on the structured approach using <code>sh:TripleRule</code>. These examples demonstrate how new data can be derived using predefined rule components together with standardised SPARQL functions provided by the SHACL SPARQL ontology.</p>
+
+      <h3>Derived/Computed property</h3>
+      <div class="example-title">Computing a property value from existing data</div> 
+
+      <p>In many datasets, certain values can be derived from other properties rather than being stored directly. Instead of requiring these values to be explicitly provided in the data, they can be computed automatically using SHACL rule-based constructs. This approach can improve data consistency and reduce redundancy by ensuring that derived values are calculated in a uniform way.</p>
+      <p>In the example below, a rule computes a person’s age from their recorded birth year. The rule applies to all instances of <code>ex:Person</code>. For each focus node, the value of <code>ex:age</code> is calculated by subtracting the value of <code>ex:birthYear</code> from the current year. 
+      This is expressed using a <code>sh:TripleRule</code>, where the subject of the generated triple is the focus node (<code>sh:this</code>), the predicate is <code>ex:age</code>, and the object is computed using a chain of functions.</p> 
+
+      <p>Conceptually, the rule expresses the following calculation:</p>
+
+      <p><code>age = YEAR(NOW()) − birthYear</code></p> 
+
+      <p>After the rule has been executed, a new triple is added to the graph for each matching individual, for example:</p>
+
+      <p><code>ex:Bob ex:age 36.</code></p> 
+
+      <p>Once these triples are generated, they may also influence validation or querying. For example, shapes or queries that rely on the presence of <code>ex:age</code> can operate on the computed values even if the age was not explicitly stored in the original dataset. This depends on the execution model of the SHACL engine, for example the rules must be executed before performing validation.</p>
+
+      <div class="example-block example-shapes">
+ex:PersonShape
+  rdf:type sh:NodeShape ;
+  sh:rule ex:AgeComputation ;
+  sh:targetClass ex:Person .
+
+ex:AgeComputation
+  rdf:type sh:TripleRule ;
+  sh:subject sh:this ;
+  sh:predicate ex:age ;
+  sh:object [
+    shsp-opr:SUBTRACT (          
+      [ shsp-fnc:YEAR ( 
+        [ shsp-fnc:NOW ( ) ] ) ]
+      [ sh:path ex:birthYear ]
+    )
+  ]
+.
+        </div>
+
+        <div class="example-block example-data">
+<span class="highlight-focus-node">ex:Bob</span> rdf:type ex:Person ;
+  ex:birthYear "1990"^^xsd:integer .
+<span class="highlight-failed-focus-node">ex:Alice</span> rdf:type ex:Person ;
+  ex:birthYear "1990-01-01"^^xsd:date .
+        </div>
+
+        <div class="example-block example-inferred-data">
+ex:Bob ex:age "36"^^xsd:integer .
+        </div>
+        <div class="example-block example-sparql">
+<span style="color:purple;">PREFIX</span> <span style="color:#FF6600;">ex:</span> <span style="color:green;">&lt;http://example.com/&gt;</span> 
+<span style="color:purple;">INSERT</span> 
+{
+  <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:age</span> <span style="color:#1F618D;">?result</span> .  <span style="color:#B45F06;"># ?this is the focus node</span>
+}
+<span style="color:purple;">WHERE</span> 
+{
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">NOW</span> ( ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_1</span> ) .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">YEAR</span> ( <span style="color:#1F618D;">?result_1</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_2</span> ) .
+  <span style="color:purple;">BIND</span> ( <span style="color:#1F618D;">$targetNode</span> <span style="color:purple;">AS</span> <span style="color:#1F618D;">?this</span> ) .  <span style="color:#B45F06;"># $targetNode is pre-bound to ex:Bob</span>
+  <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:birthYear</span> <span style="color:#1F618D;">?result_3</span> .
+  <span style="color:purple;">BIND</span> ( <span style="color:#1F618D;">?result_2</span> - <span style="color:#1F618D;">?result_3</span> <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result</span> ) .
+}
+</div>
+
+        <h3>Default value computation</h3>
+        <div class="example-title">Inferring a default value based on a property value</div>
+
+        <p>In many datasets, some properties are frequently left empty because their values are either obvious from context or follow a domain-wide convention. Instead of requiring users to fill in these values manually, SHACL rule-based constructs can automatically populate them with default values. These defaults can be static or derived dynamically from other properties. This approach ensures data completeness, improves consistency, and reduces errors in validation or querying.</p> 
+
+        <p>In the example below, a shipping company has a rule for its orders: the shipping method is by default <code>standard</code> unless the customer explicitly requests express shipping. However, for heavy parcels above 10 kilograms, the shipping becomes by default <code>express</code>. This scenario can be implemented as a SHACL <code>sh:TripleRule</code>, where the shipping method is computed dynamically using an <code>IF</code> function.</p>
+
+        <div class="example-block example-shapes">
+ex:OrderShape
+  rdf:type sh:NodeShape ;
+  sh:rule ex:ShippingMethodDefault ;
+  sh:targetClass ex:Order .
+
+ex:ShippingMethodDefault
+  rdf:type sh:TripleRule ;
+  sh:condition [
+      sh:property [
+          sh:path ex:shippingMethod ;
+          sh:maxCount 0 ;
+      ]
+  ] ;
+  sh:subject sh:this ;
+  sh:predicate ex:shippingMethod ;
+  sh:object [
+    shsp-fnc:IF (
+      [ shsp-opr:GREATER_THAN_OR_EQUALS ( 
+        [ sh:path ex:weight ] 
+        10 ) ] 
+      "express" 
+      "standard"
+    )
+  ] 
+.
+        </div>
+        <div class="example-block example-data">
+<span class="highlight-focus-node">ex:Order_01</span> rdf:type ex:Order ;
+  ex:weight "5"^^xsd:integer .
+<span class="highlight-focus-node">ex:Order_02</span> rdf:type ex:Order ;
+  ex:weight "12"^^xsd:integer .
+<span class="highlight-failed-focus-node">ex:Order_03</span> rdf:type ex:Order ;
+  ex:weight "3"^^xsd:integer ;
+  ex:shippingMethod "express" .
+        </div>
+
+        <div class="example-block example-inferred-data">
+ex:Order_01 ex:shippingMethod "standard" .
+ex:Order_02 ex:shippingMethod "express" .
+        </div>
+
+        <div class="example-block example-sparql">
+<span style="color:purple;">PREFIX</span> <span style="color:#FF6600;">ex:</span> <span style="color:green;">&lt;http://example.com/&gt;</span>
+<span style="color:purple;">INSERT</span> 
+{
+  <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:shippingMethod</span> <span style="color:#1F618D;">?result</span> .
+}
+<span style="color:purple;">WHERE</span> 
+{
+  <span style="color:purple;">BIND</span> ( <span style="color:#1F618D;">$targetNode</span> <span style="color:purple;">AS</span> <span style="color:#1F618D;">?this</span> ) .
+  <span style="color:purple;">FILTER NOT EXISTS</span> { <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:shippingMethod</span> <span style="color:#1F618D;">?shipping_method</span> . }   <span style="color:#B45F06;"># Apply sh:condition.</span>
+  <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:weight</span> <span style="color:#1F618D;">?weight</span> .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">IF</span> ( <span style="color:#1F618D;">?weight</span> > <span style="color:green;">10</span> , <span style="color:brown;">"express"</span> , <span style="color:brown;">"standard"</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result</span> ) .
+}
+        </div>
+
+        <h3>Normalization</h3>
+        <div class="example-title">Unifying overlapping properties into a canonical property</div>
+
+        <p>In many datasets, the same conceptual value may be recorded in different properties, or in slightly different formats. This can happen when data comes from multiple sources, systems, or historical records. A normalization activity is the process of unifying these multiple representations into a single canonical property or format, ensuring consistency and simplifying querying, reporting, and downstream processing.</p> 
+
+        <p>For example, a person’s last name might be recorded under different properties such as <code>lastName</code>, <code>surname</code>, and/or <code>familyName</code>. Rather than leaving these values scattered across the dataset, a normalization activity can select a single value on a preferred order, and store it in a canonical property, such as <code>normalisedLastName</code>. This ensures that queries and applications always see the same, consistent value for the last name, regardless of which original property it came from.</p> 
+
+        <p>The example below shows how this can be implemented using a the SPARQL <code>COALESCE</code> function, which automatically picks the first available value from the prioritized list of properties.</p>
+        <p><strong>Note on SPARQL Function with multiple parameters</strong></p>
+        <p>Functions like <code>COALESCE</code>, <code>CONCAT</code>, and <code>IN</code>, support only two parameters at a time. In that case, it is suggested to nest multiple COALESCE functions to handle more values.</p>
+
+        <div class="example-block example-shapes">
+ex:PersonShape
+  rdf:type sh:NodeShape ;
+  sh:rule ex:FamilyNameComputation ;
+  sh:targetClass ex:Person .
+
+ex:FamilyNameComputation
+  rdf:type sh:TripleRule ;
+  sh:subject sh:this ;
+  sh:predicate ex:normalisedLastName ;
+  sh:object [
+    shsp-fnc:COALESCE (          
+      [ sh:path ex:lastName ]
+      [ shsp-fnc:COALESCE (                    
+        [ sh:path ex:surname ]
+        [ sh:path ex:familyName ] ) ] 
+    ) 
+  ]
+.
+        </div>
+
+        <div class="example-block example-data">
+<span class="highlight-focus-node">ex:Bob</span> rdf:type ex:Person ;
+  ex:surname "Doe" .
+<span class="highlight-failed-focus-node">ex:Alice</span> rdf:type ex:Person ;
+  ex:fatherName "Doe" .
+        </div>
+
+        <div class="example-block example-inferred-data">
+ex:Bob ex:normalisedLastName "Doe" .
+        </div>
+
+        <div class="example-block example-sparql">
+<span style="color:purple;">PREFIX</span> <span style="color:#FF6600;">ex:</span> <span style="color:green;">&lt;http://example.com/&gt;</span>
+<span style="color:purple;">INSERT</span> 
+{
+  <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:normalisedLastName</span> <span style="color:#1F618D;">?result</span> .
+}
+<span style="color:purple;">WHERE</span> 
+{
+  <span style="color:purple;">BIND</span> ( <span style="color:#1F618D;">$targetNode</span> <span style="color:purple;">AS</span> <span style="color:#1F618D;">?this</span> ) .
+  <span style="color:purple;">OPTIONAL</span> { <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:lastName</span> <span style="color:#1F618D;">?lastName</span> . }
+  <span style="color:purple;">OPTIONAL</span> { <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:surname</span> <span style="color:#1F618D;">?surname</span> . }
+  <span style="color:purple;">OPTIONAL</span> { <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:familyName</span> <span style="color:#1F618D;">?familyName</span> . }
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">COALESCE</span> ( <span style="color:#1F618D;">?surname</span> , <span style="color:#1F618D;">?familyName</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_1</span> ) .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">COALESCE</span> ( <span style="color:#1F618D;">?lastName</span> , <span style="color:#1F618D;">?result_1</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result</span> ) .
+}
+        </div>
+
+        <h3>Denormalization</h3>
+        <div class="example-title">Rolling up ordered values using sequence-based predicates</div>
+<p>In some datasets, related values are represented as separate nodes that contain an explicit order or sequence number. While this structure provides flexibility for modelling ordered lists, it may require additional joins or path expressions when querying the data.</p>
+
+<p>A denormalisation activity can simplify access to such information by rolling up these values directly onto the main resource. Using SHACL rule-based constructs, new predicates can be constructed dynamically based on the sequence number of each related value.</p>
+
+<p>In the example below, an order contains several items, each associated with a sequence number. A SHACL rule generates predicates such as <code>ex:item_1</code>, <code>ex:item_2</code>, and <code>ex:item_3</code>, allowing the ordered items to be accessed directly from the order resource without traversing the intermediate nodes.</p>
+
+        <div class="example-block example-shapes">
+ex:ItemShape
+  rdf:type sh:NodeShape ;
+  sh:rule ex:ItemComputation ;
+  sh:targetObjectsOf ex:hasItem .
+
+ex:ItemComputation
+  rdf:type sh:TripleRule ;
+  sh:subject [ sh:path [ sh:inversePath ex:hasItem ] ] ;
+  sh:predicate [
+    shsp-fnc:IRI (  
+      [ shsp-fnc:CONCAT ( 
+        [ shsp-fnc:STR ( ex:hasItem ) ]
+        [ shsp-fnc:CONCAT ( 
+          "_"
+          [ shsp-fnc:STR ( [ sh:path ex:sequence ] ) ] ) ]
+        )
+      ]
+    )
+  ] ;
+  sh:object sh:this ;
+.
+        </div>
+
+        <div class="example-block example-data">
+ex:Order_1 ex:hasItem <span class="highlight-focus-node">ex:Item_1</span> , <span class="highlight-focus-node">ex:Item_2</span> , <span class="highlight-focus-node">ex:Item_3</span> .
+ex:Item_1 ex:sequence "1"^^xsd:integer .
+ex:Item_2 ex:sequence "2"^^xsd:integer .
+ex:Item_3 ex:sequence "3"^^xsd:integer .
+        </div>
+
+        <div class="example-block example-inferred-data">
+ex:Order_1 ex:hasItem_1 ex:Item_1 .
+ex:Order_1 ex:hasItem_2 ex:Item_2 .
+ex:Order_1 ex:hasItem_3 ex:Item_3 .
+        </div>
+
+        <div class="example-block example-sparql">
+<span style="color:purple;">PREFIX</span> <span style="color:#FF6600;">ex:</span> <span style="color:green;">&lt;http://example.com/&gt;</span>
+<span style="color:purple;">INSERT</span> 
+{
+  <span style="color:#1F618D;">?subject</span> <span style="color:#1F618D;">?predicate</span> <span style="color:#1F618D;">?this</span> .
+}
+<span style="color:purple;">WHERE</span> 
+{
+  <span style="color:purple;">BIND</span> ( <span style="color:#1F618D;">$targetNode</span> <span style="color:purple;">AS</span> <span style="color:#1F618D;">?this</span> ) .
+  <span style="color:#1F618D;">?this</span> ^<span style="color:#FF6600;">ex:hasItem</span> <span style="color:#1F618D;">?subject</span> .
+  <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:sequence</span> <span style="color:#1F618D;">?sequence</span> .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">STR</span> ( <span style="color:#1F618D;">?sequence</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_1</span> ) .  
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">CONCAT</span> ( <span style="color:brown;">"_"</span> , <span style="color:#1F618D;">?result_1</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_2</span> ) .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">STR</span> ( <span style="color:#FF6600;">ex:hasItem</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_3</span> ) .  
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">CONCAT</span> ( <span style="color:#1F618D;">?result_3</span> , <span style="color:#1F618D;">?result_2</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_4</span> ) .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">IRI</span> ( <span style="color:#1F618D;">?result_4</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?predicate</span> ) .  
+}
+        </div>
+  </section>
 </html>
