@@ -12,8 +12,7 @@ The ontology is intended to help users **standardize SPARQL queries within SHACL
 ---
 
 ## Status
-
-- This is an **informal draft**; it has no official standing or normative authority.  
+ 
 - The content may evolve over time and is provided for **documentation and reference purposes only**.  
 - Examples illustrate potential approaches and are **not a mandatory specification**.  
 
