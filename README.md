@@ -21,10 +21,6 @@ The ontology is intended to help users **standardize SPARQL queries within SHACL
 ## Files
 
 The SHACL-SPARQL ontology and example files are located in the `data/` folder of this repository:  
-
-- GitHub repository: [https://github.com/MiltiadisGkatzios/shacl-sparql/](https://github.com/MiltiadisGkatzios/shacl-sparql/)  
-- Example files folder: [https://github.com/MiltiadisGkatzios/shacl-sparql/example/](https://github.com/MiltiadisGkatzios/shacl-sparql/example/)
-
 You can also access the files directly via GitHub Pages:  
 
 ```text
