@@ -18,34 +18,6 @@
   owl:imports sh: ;
   owl:versionInfo "0.8.0" ;
   owl:versionIRI <https://github.com/MiltiadisGkatzios/shacl-sparql/0.8.0/> ;
-  sh:declare [
-      sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
-      sh:prefix "rdf" ;
-    ] ;
-  sh:declare [
-      sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
-      sh:prefix "rdfs" ;
-    ] ;
-  sh:declare [
-      sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
-      sh:prefix "sh" ;
-    ] ;
-  sh:declare [
-      sh:namespace "https://github.com/MiltiadisGkatzios/shsp/"^^xsd:anyURI ;
-      sh:prefix "shsp" ;
-    ] ;
-  sh:declare [
-      sh:namespace "https://github.com/MiltiadisGkatzios/shsp/function#"^^xsd:anyURI ;
-      sh:prefix "shsp-fnc" ;
-    ] ;
-  sh:declare [
-      sh:namespace "https://github.com/MiltiadisGkatzios/shsp/operator#"^^xsd:anyURI ;
-      sh:prefix "shsp-opr" ;
-    ] ;
-  sh:declare [
-      sh:namespace "https://github.com/MiltiadisGkatzios/shsp/symbol#"^^xsd:anyURI ;
-      sh:prefix "shsp-smb" ;
-    ] ;
 .
 
 shsp-fnc:ABS
