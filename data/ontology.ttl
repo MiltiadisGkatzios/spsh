@@ -9,7 +9,6 @@
 @prefix shsp-opr: <https://github.com/MiltiadisGkatzios/shsp/operator#> .
 @prefix shsp-smb: <https://github.com/MiltiadisGkatzios/shsp/symbol#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix ex: <http://example.com/> .
 
 <https://github.com/MiltiadisGkatzios/shacl-sparql/>
   rdf:type owl:Ontology ;
