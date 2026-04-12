@@ -15,7 +15,7 @@
   rdf:type owl:Ontology ;
   dc:creator "Miltiadis Gkatzios" ;
   dcterms:created "2025-01-04"^^xsd:date ;
-  dcterms:modified "2025-03-29"^^xsd:date ;
+  dcterms:modified "2026-03-29"^^xsd:date ;
   owl:imports <https://github.com/MiltiadisGkatzios/shacl-sparql/> ;
   owl:versionInfo "0.8.0" ;
   owl:versionIRI <https://github.com/MiltiadisGkatzios/shacl-sparql/example/0.8.0/> ;
