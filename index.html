@@ -5,17 +5,16 @@
   <meta charset="utf-8" />
   <title>SH - SP Documentation</title>
   <script
-  src="https://www.w3.org/Tools/respec/respec-w3c"
+  src="https://cdn.jsdelivr.net/npm/respec/builds/respec-w3c.js"
   class="remove"
   defer
   ></script>
   <script class="remove">
     var respecConfig = {
-      specStatus: "unofficial",
+      specStatus: "base",
       editors: [{ name: "Miltos Gkatzios", url: "https://www.linkedin.com/in/miltos-gkat/" }],
-      github: "https://github.com/MiltiadisGkatzios/sh-sp/",
-      shortName: "sh-sp",
-      xref: "web-platform",
+      github: "https://github.com/MiltiadisGkatzios/shsp",
+      shortName: "shsp",
       maxTocLevel: 2,
       license: "document",
     };
@@ -66,7 +65,11 @@
     .sparql-notes { margin-top: 10px; font-size: 0.9em; }
     .note-ast { color: red; font-weight: bold; }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
+  <script>window.addEventListener('load', () => mermaid.initialize({ startOnLoad: true }));</script>
 </head>
+
+<body>
 
 <section id="abstract">
   <p>This document presents a linked data ontology that formalizes SPARQL 1.1 functions as instances of <code>sh:SPARQLFunction</code>, based on the <a href="https://www.w3.org/TR/shacl-af/" target="_blank">SHACL Advanced Features</a>. Each SPARQL function, mathematical operation, and symbol is uniquely instantiated and described using labels, definitions, and references from the <a href="https://www.w3.org/TR/sparql11-query/" target="_blank"> SPARQL 1.1 Query Language.</a></p>
@@ -129,19 +132,19 @@
         </tr>
         <tr>
           <td style="border: 1px solid black; padding: 8px;">shsp</td>
-          <td style="border: 1px solid black; padding: 8px;"><a href="https://github.com/MiltiadisGkatzios/shsp#">https://github.com/MiltiadisGkatzios/shsp#</a></td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="https://w3id.org/shsp/">https://w3id.org/shsp/</a></td>
         </tr>
         <tr>
           <td style="border: 1px solid black; padding: 8px;">shsp-fnc</td>
-          <td style="border: 1px solid black; padding: 8px;"><a href="https://github.com/MiltiadisGkatzios/shsp#">https://github.com/MiltiadisGkatzios/shsp/function#</a></td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="https://w3id.org/shsp/function#">https://w3id.org/shsp/function#</a></td>
         </tr>      
         <tr>
           <td style="border: 1px solid black; padding: 8px;">shsp-opr</td>
-          <td style="border: 1px solid black; padding: 8px;"><a href="https://github.com/MiltiadisGkatzios/shsp#">https://github.com/MiltiadisGkatzios/shsp/operator#</a></td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="https://w3id.org/shsp/operator#">https://w3id.org/shsp/operator#</a></td>
         </tr>
         <tr>
           <td style="border: 1px solid black; padding: 8px;">shsp-smb</td>
-          <td style="border: 1px solid black; padding: 8px;"><a href="https://github.com/MiltiadisGkatzios/shsp#">https://github.com/MiltiadisGkatzios/shsp/symbol#</a></td>
+          <td style="border: 1px solid black; padding: 8px;"><a href="https://w3id.org/shsp/symbol#">https://w3id.org/shsp/symbol#</a></td>
         </tr>
         <tr>
           <td style="border: 1px solid black; padding: 8px;">xsd</td>
@@ -182,15 +185,7 @@
   <h2>SH - SP ontology</h2>
   <p> This ontology is <strong>instance-centric</strong> and intentionally does <em>not</em> define a domain class model or class hierarchy. Each resource described in this ontology is a concrete representation of a SPARQL 1.1 construct (function, operator or symbol) and it is modeled as an
     instance of <code>sh:SPARQLFunction</code> from the <a href="https://www.w3.org/TR/shacl-af/" target="_blank" rel="noopener noreferrer">SHACL Advanced Features</a> framework.</p>
-  <html>
-    <head>
-      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-      <script>
-        mermaid.initialize({ startOnLoad: true });
-      </script>
-    </head>
-    <body>
-    <div style="position: relative; width: 100%; height: 200px;">
+  <div style="position: relative; width: 100%; height: 200px;">
       <div class="mermaid" style="width: 100%; height: 100%;">
       classDiagram
         direction LR
@@ -221,8 +216,6 @@
     </div>
     <p>The diagram above shows how Node Shapes, Triple Rules, and Node Expressions are used to generate new data. It omits other elements for clarity and focuses specifically on the part relevant to the SH-SP ontology.</p>
     <p>The values of <code>sh:subject</code>, <code>sh:predicate</code>, and <code>sh:object</code> are Node Expressions. As it is highlighted, node expressions might be instances of <code>sh:SPARQLFunction</code> such as the ones found in the SH-SP ontology.</p>
-    </body>
-  </html>
   <h3>Modeling approach</h3>
   <p>Each instance in the SH - SP ontology represents uniquely a SPARQL function, operator or symbol found in the <a href="https://www.w3.org/TR/sparql11-query/" target="_blank" rel="noopener noreferrer"> SPARQL 1.1 Query language</a>. There is a consistent set of metadata properties that describe:</p>
   <ul>
@@ -390,277 +383,277 @@ shsp-fnc:STRSTARTS
     <tbody>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ABS"><code>shsp-fnc:ABS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#ABS"><code>shsp-fnc:ABS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-abs"><code>ABS</code> <span style="font-size:0.85em">( numeric term )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#BNODE"><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( )</span><br><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#BNODE"><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( )</span><br><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:BNODE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-bnode"><code>BNODE</code> <span style="font-size:0.85em">( )</span><br><code>BNODE</code> <span style="font-size:0.85em">( simple literal )</span><br><code>BNODE</code> <span style="font-size:0.85em">( xsd:string )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#BOUND"><code>shsp-fnc:BOUND</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#BOUND"><code>shsp-fnc:BOUND</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-bound"><code>BOUND</code> <span style="font-size:0.85em">( variable var )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#CEIL"><code>shsp-fnc:CEIL</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#CEIL"><code>shsp-fnc:CEIL</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-ceil"><code>CEIL</code> <span style="font-size:0.85em">( numeric term )</span></a></td>
       </tr>
       <tr>
         <td><span style="color:red">*</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#COALESCE"><code>shsp-fnc:COALESCE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#COALESCE"><code>shsp-fnc:COALESCE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-coalesce"><code>COALESCE</code> <span style="font-size:0.85em">( expression, ... )</span></a></td>
       </tr>
       <tr>
         <td><span style="color:red">*</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#CONCAT"><code>shsp-fnc:CONCAT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#CONCAT"><code>shsp-fnc:CONCAT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-concat"><code>CONCAT</code> <span style="font-size:0.85em">( string literal ltrl1 ... string literal ltrln )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#CONTAINS"><code>shsp-fnc:CONTAINS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#CONTAINS"><code>shsp-fnc:CONTAINS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-contains"><code>CONTAINS</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#DATATYPE"><code>shsp-fnc:DATATYPE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#DATATYPE"><code>shsp-fnc:DATATYPE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-datatype"><code>DATATYPE</code> <span style="font-size:0.85em">( literal literal )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#DAY"><code>shsp-fnc:DAY</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#DAY"><code>shsp-fnc:DAY</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-day"><code>DAY</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ENCODE_FOR_URI"><code>shsp-fnc:ENCODE_FOR_URI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#ENCODE_FOR_URI"><code>shsp-fnc:ENCODE_FOR_URI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-encode"><code>DAY</code> <span style="font-size:0.85em">( string literal ltrl )</span></a></td>
       </tr>
       <tr>
         <td><span style="color:red">***</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#EXISTS"><code>shsp-fnc:EXISTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#EXISTS"><code>shsp-fnc:EXISTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-filter-exists"><code>EXISTS</code> <span style="font-size:0.85em"> { pattern }</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#FLOOR"><code>shsp-fnc:FLOOR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#FLOOR"><code>shsp-fnc:FLOOR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-floor"><code>FLOOR</code> <span style="font-size:0.85em">( numeric term )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#HOURS"><code>shsp-fnc:HOURS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#HOURS"><code>shsp-fnc:HOURS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-floor"><code>HOURS</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#IF"><code>shsp-fnc:IF</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#IF"><code>shsp-fnc:IF</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-if"><code>IF</code> <span style="font-size:0.85em">( expression1, expression2, expression3 )</span></a></td>
       </tr>
       <tr>
         <td><span style="color:red">**</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#IN"><code>shsp-fnc:IN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#IN"><code>shsp-fnc:IN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-in"><code>IN</code> <span style="font-size:0.85em">( expression, ... )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#IRI"><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#IRI"><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:IRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:URI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-iri"><code>IRI</code> <span style="font-size:0.85em">( simple literal )</span><br><code>IRI</code> <span style="font-size:0.85em">( xsd:string )</span><br><code>IRI</code> <span style="font-size:0.85em">( iri )</span><br><code>URI</code> <span style="font-size:0.85em">( simple literal )</span><br><code>URI</code> <span style="font-size:0.85em">( xsd:string )</span><br><code>URI</code> <span style="font-size:0.85em">( iri )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ISBLANK"><code>shsp-fnc:ISBLANK</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#ISBLANK"><code>shsp-fnc:ISBLANK</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-isBlank"><code>ISBLANK</code> <span style="font-size:0.85em">( RDF term term )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ISIRI"><code>shsp-fnc:ISIRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:ISURI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#ISIRI"><code>shsp-fnc:ISIRI</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:ISURI</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-isIRI"><code>ISIRI</code> <span style="font-size:0.85em">( RDF term term )</span><br><code>ISURI</code> <span style="font-size:0.85em">( RDF term term )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ISLITERAL"><code>shsp-fnc:ISLITERAL</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#ISLITERAL"><code>shsp-fnc:ISLITERAL</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-isLiteral"><code>ISLITERAL</code> <span style="font-size:0.85em">( RDF term term )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ISNUMERIC"><code>shsp-fnc:ISNUMERIC</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#ISNUMERIC"><code>shsp-fnc:ISNUMERIC</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-isNumeric"><code>ISNUMERIC</code> <span style="font-size:0.85em">( RDF term term )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#LANG"><code>shsp-fnc:LANG</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#LANG"><code>shsp-fnc:LANG</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-lang"><code>LANG</code> <span style="font-size:0.85em">( literal ltrl )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#LANGMATCHES"><code>shsp-fnc:LANGMATCHES</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#LANGMATCHES"><code>shsp-fnc:LANGMATCHES</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-langMatches"><code>LANGMATCHES</code> <span style="font-size:0.85em">( simple literal language-tag, simple literal language-range )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#LCASE"><code>shsp-fnc:LCASE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#LCASE"><code>shsp-fnc:LCASE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-lcase"><code>LCASE</code> <span style="font-size:0.85em">( string literal str )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#MD5"><code>shsp-fnc:MD5</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:MD5</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#MD5"><code>shsp-fnc:MD5</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:MD5</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-md5"><code>MD5</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>MD5</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#MINUTES"><code>shsp-fnc:MINUTES</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#MINUTES"><code>shsp-fnc:MINUTES</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-minutes"><code>MINUTES</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#MONTH"><code>shsp-fnc:MONTH</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#MONTH"><code>shsp-fnc:MONTH</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-month"><code>MONTH</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
       </tr>
       <tr>
         <td><span style="color:red">***</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#NOT_EXISTS"><code>shsp-fnc:NOT_EXISTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#NOT_EXISTS"><code>shsp-fnc:NOT_EXISTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-filter-exists"><code>NOT EXISTS</code> <span style="font-size:0.85em"> { pattern }</span></a></td>
       </tr>
       <tr>
         <td><span style="color:red">**</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#NOT_IN"><code>shsp-fnc:NOT_IN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#NOT_IN"><code>shsp-fnc:NOT_IN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-not-in"><code>NOT IN</code> <span style="font-size:0.85em">( expression, ... )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#NOW"><code>shsp-fnc:NOW</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#NOW"><code>shsp-fnc:NOW</code> <span style="font-size:0.85em">( )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-now"><code>NOW</code> <span style="font-size:0.85em">( )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#RAND"><code>shsp-fnc:RAND</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#RAND"><code>shsp-fnc:RAND</code> <span style="font-size:0.85em">( )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#idp2130040"><code>RAND</code> <span style="font-size:0.85em">( )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#REGEX"><code>shsp-fnc:REGEX</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span><br><code>shsp-fnc:REGEX</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#REGEX"><code>shsp-fnc:REGEX</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span><br><code>shsp-fnc:REGEX</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-regex"><code>REGEX</code> <span style="font-size:0.85em">( string literal text, simple literal pattern )</span><br><code>REGEX</code> <span style="font-size:0.85em">( string literal text, simple literal pattern, simple literal flags )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#REPLACE"><code>shsp-fnc:REPLACE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3)</span><br><code>shsp-fnc:REPLACE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 :arg_4 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#REPLACE"><code>shsp-fnc:REPLACE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3)</span><br><code>shsp-fnc:REPLACE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 :arg_4 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-replace"><code>REPLACE</code> <span style="font-size:0.85em">( string literal arg, simple literal pattern, simple literal replacement )</span><br><code>REPLACE</code> <span style="font-size:0.85em">( string literal arg, simple literal pattern, simple literal replacement,  simple literal flags )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#ROUND"><code>shsp-fnc:ROUND</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#ROUND"><code>shsp-fnc:ROUND</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-round"><code>ROUND</code> <span style="font-size:0.85em">( numeric term )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SAMETERM"><code>shsp-fnc:SAMETERM</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#SAMETERM"><code>shsp-fnc:SAMETERM</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-sameTerm"><code>SAMETERM</code> <span style="font-size:0.85em">( RDF term term1, RDF term term2 )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SECONDS"><code>shsp-fnc:SECONDS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#SECONDS"><code>shsp-fnc:SECONDS</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-seconds"><code>SECONDS</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SHA1"><code>shsp-fnc:SHA1</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA1</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#SHA1"><code>shsp-fnc:SHA1</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA1</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-sha1"><code>SHA1</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>SHA1</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SHA256"><code>shsp-fnc:SHA256</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA256</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#SHA256"><code>shsp-fnc:SHA256</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA256</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-sha256"><code>SHA256</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>SHA256</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SHA384"><code>shsp-fnc:SHA384</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA384</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#SHA384"><code>shsp-fnc:SHA384</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA384</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-sha384"><code>SHA384</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>SHA384</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SHA512"><code>shsp-fnc:SHA512</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA512</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#SHA512"><code>shsp-fnc:SHA512</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:SHA512</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-sha512"><code>SHA512</code> <span style="font-size:0.85em">( simple literal arg )</span><br><code>SHA512</code> <span style="font-size:0.85em">( xsd:string arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STR"><code>shsp-fnc:STR</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:STR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STR"><code>shsp-fnc:STR</code> <span style="font-size:0.85em">( :arg_1 )</span><br><code>shsp-fnc:STR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-str"><code>STR</code> <span style="font-size:0.85em">( literal ltrl )</span><br><code>STR</code> <span style="font-size:0.85em">( IRI rsrc )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRAFTER"><code>shsp-fnc:STRAFTER</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STRAFTER"><code>shsp-fnc:STRAFTER</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-strafter"><code>STRAFTER</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRBEFORE"><code>shsp-fnc:STRBEFORE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STRBEFORE"><code>shsp-fnc:STRBEFORE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-strbefore"><code>STRBEFORE</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRDT"><code>shsp-fnc:STRDT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STRDT"><code>shsp-fnc:STRDT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-strdt"><code>STRDT</code> <span style="font-size:0.85em">( simple literal lexicalForm, IRI datatypeIRI )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRENDS"><code>shsp-fnc:STRENDS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STRENDS"><code>shsp-fnc:STRENDS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-strends"><code>STRENDS</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRLANG"><code>shsp-fnc:STRLANG</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STRLANG"><code>shsp-fnc:STRLANG</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-strlang"><code>STRLANG</code> <span style="font-size:0.85em">( simple literal lexicalForm, simple literal langTag )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRLEN"><code>shsp-fnc:STRLEN</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STRLEN"><code>shsp-fnc:STRLEN</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-strlen"><code>STRLEN</code> <span style="font-size:0.85em">( string literal str )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRSTARTS"><code>shsp-fnc:STRSTARTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STRSTARTS"><code>shsp-fnc:STRSTARTS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-strstarts"><code>STRSTARTS</code> <span style="font-size:0.85em">( string literal arg1, string literal arg2 )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#STRUUID"><code>shsp-fnc:STRUUID</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#STRUUID"><code>shsp-fnc:STRUUID</code> <span style="font-size:0.85em">( )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-struuid"><code>STRUUID</code> <span style="font-size:0.85em">( )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#SUBSTR"><code>shsp-fnc:SUBSTR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span><br><code>shsp-fnc:SUBSTR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#SUBSTR"><code>shsp-fnc:SUBSTR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span><br><code>shsp-fnc:SUBSTR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 :arg_3 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-substr"><code>SUBSTR</code> <span style="font-size:0.85em">( string literal source, xsd:integer startingLoc )</span><br><code>SUBSTR</code> <span style="font-size:0.85em">( string literal source, xsd:integer startingLoc, xsd:integer length )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#TIMEZONE"><code>shsp-fnc:TIMEZONE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#TIMEZONE"><code>shsp-fnc:TIMEZONE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-timezone"><code>TIMEZONE</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#TZ"><code>shsp-fnc:TZ</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#TZ"><code>shsp-fnc:TZ</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-tz"><code>TZ</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#UCASE"><code>shsp-fnc:UCASE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#UCASE"><code>shsp-fnc:UCASE</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-ucase"><code>UCASE</code> <span style="font-size:0.85em">( string literal str )</span></a></td>
       </tr>
       <tr>
         <td><span style="color:red;">****</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#UNDEF"><code>shsp-fnc:UNDEF</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#UNDEF"><code>shsp-fnc:UNDEF</code> <span style="font-size:0.85em">( )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#inline-data"><code>UNDEF</code> <span style="font-size:0.85em">( )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#UUID"><code>shsp-fnc:UUID</code> <span style="font-size:0.85em">( )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#UUID"><code>shsp-fnc:UUID</code> <span style="font-size:0.85em">( )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-uuid"><code>UUID</code> <span style="font-size:0.85em">( )</span></a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/function#YEAR"><code>shsp-fnc:YEAR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/function#YEAR"><code>shsp-fnc:YEAR</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-year"><code>YEAR</code> <span style="font-size:0.85em">( xsd:dateTime arg )</span></a></td>
       </tr>
     </tbody>
@@ -688,52 +681,52 @@ shsp-fnc:STRSTARTS
     <tbody>
       <tr>
         <td><span style="color:red">*</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#ADD"><code>shsp-opr:ADD</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#ADD"><code>shsp-opr:ADD</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>+</strong> B</a></td>
       </tr>
       <tr>
         <td><span style="color:red">*</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#DIVIDE"><code>shsp-opr:DIVIDE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#DIVIDE"><code>shsp-opr:DIVIDE</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>/</strong> B</a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#EQUALS"><code>shsp-opr:EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#EQUALS"><code>shsp-opr:EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>=</strong> B</a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#GREATER_THAN"><code>shsp-opr:GREATER_THAN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#GREATER_THAN"><code>shsp-opr:GREATER_THAN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>></strong> B</a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#GREATER_THAN_OR_EQUALS"><code>shsp-opr:GREATER_THAN_OR_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#GREATER_THAN_OR_EQUALS"><code>shsp-opr:GREATER_THAN_OR_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>>=</strong> B</a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#LESS_THAN"><code>shsp-opr:LESS_THAN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#LESS_THAN"><code>shsp-opr:LESS_THAN</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong><</strong> B</a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#LESS_THAN_OR_EQUALS"><code>shsp-opr:LESS_THAN_OR_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#LESS_THAN_OR_EQUALS"><code>shsp-opr:LESS_THAN_OR_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong><=</strong> B</a></td>
       </tr>
       <tr>
         <td><span style="color:red">*</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#MULTIPLY"><code>shsp-opr:MULTIPLY</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#MULTIPLY"><code>shsp-opr:MULTIPLY</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>*</strong> B</a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#NOT_EQUALS"><code>shsp-opr:NOT_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#NOT_EQUALS"><code>shsp-opr:NOT_EQUALS</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>!=</strong> B</a></td>
       </tr>
       <tr>
         <td><span style="color:red">*</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/operator#SUBTRACT"><code>shsp-opr:SUBTRACT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/operator#SUBTRACT"><code>shsp-opr:SUBTRACT</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping">A <strong>-</strong> B</a></td>
       </tr>
     </tbody>
@@ -758,17 +751,17 @@ shsp-fnc:STRSTARTS
     <tbody>
       <tr>
         <td><span style="color:red">*</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/symbol#AND"><code>shsp-smb:AND</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/symbol#AND"><code>shsp-smb:AND</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-logical-and">left <strong>&&</strong> right</a></td>
       </tr>
       <tr>
         <td></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/symbol#EXCLAMATION_MARK"><code>shsp-smb:EXCLAMATION_MARK</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/symbol#EXCLAMATION_MARK"><code>shsp-smb:EXCLAMATION_MARK</code> <span style="font-size:0.85em">( :arg_1 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#OperatorMapping"><strong>!</strong></a></td>
       </tr>
       <tr>
         <td><span style="color:red">*</span></td>
-        <td><a href="https://github.com/MiltiadisGkatzios/shsp/symbol#OR"><code>shsp-smb:OR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
+        <td><a href="https://w3id.org/shsp/symbol#OR"><code>shsp-smb:OR</code> <span style="font-size:0.85em">( :arg_1 :arg_2 )</span></a></td>
         <td><a href="https://www.w3.org/TR/sparql11-query/#func-logical-or">left <strong>||</strong> right</a></td>
       </tr>
     </tbody>
@@ -1059,4 +1052,5 @@ ex:Order_1 ex:hasItem_3 ex:Item_3 .
 }
         </div>
   </section>
+</body>
 </html>

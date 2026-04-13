@@ -5,20 +5,20 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix shsp: <https://github.com/MiltiadisGkatzios/shsp/> .
-@prefix shsp-fnc: <https://github.com/MiltiadisGkatzios/shsp/function#> .
-@prefix shsp-opr: <https://github.com/MiltiadisGkatzios/shsp/operator#> .
-@prefix shsp-smb: <https://github.com/MiltiadisGkatzios/shsp/symbol#> .
+@prefix shsp: <https://w3id.org/shsp/> .
+@prefix shsp-fnc: <https://w3id.org/shsp/function#> .
+@prefix shsp-opr: <https://w3id.org/shsp/operator#> .
+@prefix shsp-smb: <https://w3id.org/shsp/symbol#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/MiltiadisGkatzios/shacl-sparql/example/>
+<https://w3id.org/shsp/example/>
   rdf:type owl:Ontology ;
   dc:creator "Miltiadis Gkatzios" ;
   dcterms:created "2025-01-04"^^xsd:date ;
   dcterms:modified "2026-03-29"^^xsd:date ;
-  owl:imports <https://github.com/MiltiadisGkatzios/shacl-sparql/> ;
+  owl:imports <https://w3id.org/shsp/> ;
   owl:versionInfo "0.8.0" ;
-  owl:versionIRI <https://github.com/MiltiadisGkatzios/shacl-sparql/example/0.8.0/> ;
+  owl:versionIRI <https://w3id.org/shsp/example/0.8.0/> ;
 .
 
 # Derived/Computed property
