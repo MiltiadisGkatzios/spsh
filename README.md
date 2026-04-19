@@ -1,4 +1,4 @@
-# SHACL-SPARQL Functions Ontology
+# SPSH Ontology
 
 ![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
 [Specification](https://w3id.org/shsp/) | [GitHub Pages](https://miltiadisgkatzios.github.io/shsp/)
