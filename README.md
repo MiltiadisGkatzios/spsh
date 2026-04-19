@@ -1,7 +1,7 @@
 # SPSH Ontology
 
 ![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
-[Specification](https://w3id.org/shsp/) | [GitHub Pages](https://miltiadisgkatzios.github.io/shsp/)
+[Specification](https://w3id.org/spsh/) | [GitHub Pages](https://miltiadisgkatzios.github.io/spsh/)
 
 This repository contains an ontology that formalizes **SPARQL 1.1 functions** as instances of `sh:SPARQLFunction` using **SHACL Advanced Features**.  
 
@@ -20,7 +20,7 @@ The ontology is intended to help users **standardize SPARQL queries within SHACL
 
 ## Files
 
-The SHACL-SPARQL ontology and example files are located in the `data/` folder of this repository:  
+The SPSH ontology and example files are located in the `data/` folder of this repository:  
 You can also access the files directly via GitHub Pages:  
 
 ```text
@@ -38,5 +38,5 @@ You may copy, distribute, and adapt this work for non-commercial purposes, with 
 
 ## Citation
 If you use this repository in research or projects, please cite:
-Miltiadis Gkatzios. (2026). SHACL-SPARQL Functions Ontology. 
+Miltiadis Gkatzios. (2026). SPSH Ontology. 
 https://w3id.org/shsp/
