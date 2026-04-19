@@ -918,7 +918,7 @@ ex:Order_02 ex:shippingMethod "express" .</div>
   <span style="color:purple;">BIND</span> ( <span style="color:#1F618D;">$targetNode</span> <span style="color:purple;">AS</span> <span style="color:#1F618D;">?this</span> ) .
   <span style="color:purple;">FILTER NOT EXISTS</span> { <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:shippingMethod</span> <span style="color:#1F618D;">?shipping_method</span> . }   <span style="color:#B45F06;"># Apply sh:condition.</span>
   <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:weight</span> <span style="color:#1F618D;">?weight</span> .
-  <span style="color:purple;">BIND</span> ( <span style="color:purple;">IF</span> ( <span style="color:#1F618D;">?weight</span> > <span style="color:green;">10</span> , <span style="color:brown;">"express"</span> , <span style="color:brown;">"standard"</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result</span> ) .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">IF</span> ( <span style="color:#1F618D;">?weight</span> >= <span style="color:green;">10</span> , <span style="color:brown;">"express"</span> , <span style="color:brown;">"standard"</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result</span> ) .
 }</div>
             </section>
 
