@@ -1020,11 +1020,11 @@ ex:Order_1 ex:hasItem_3 ex:Item_3 .</div>
 {
   <span style="color:purple;">BIND</span> ( <span style="color:#1F618D;">$targetNode</span> <span style="color:purple;">AS</span> <span style="color:#1F618D;">?this</span> ) .
   <span style="color:#1F618D;">?this</span> ^<span style="color:#FF6600;">ex:hasItem</span> <span style="color:#1F618D;">?subject</span> .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">STR</span> ( <span style="color:#FF6600;">ex:hasItem</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_1</span> ) .  
   <span style="color:#1F618D;">?this</span> <span style="color:#FF6600;">ex:sequence</span> <span style="color:#1F618D;">?sequence</span> .
-  <span style="color:purple;">BIND</span> ( <span style="color:purple;">STR</span> ( <span style="color:#1F618D;">?sequence</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_1</span> ) .  
-  <span style="color:purple;">BIND</span> ( <span style="color:purple;">CONCAT</span> ( <span style="color:brown;">"_"</span> , <span style="color:#1F618D;">?result_1</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_2</span> ) .
-  <span style="color:purple;">BIND</span> ( <span style="color:purple;">STR</span> ( <span style="color:#FF6600;">ex:hasItem</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_3</span> ) .  
-  <span style="color:purple;">BIND</span> ( <span style="color:purple;">CONCAT</span> ( <span style="color:#1F618D;">?result_3</span> , <span style="color:#1F618D;">?result_2</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_4</span> ) .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">STR</span> ( <span style="color:#1F618D;">?sequence</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_2</span> ) .  
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">CONCAT</span> ( <span style="color:brown;">"_"</span> , <span style="color:#1F618D;">?result_2</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_3</span> ) .
+  <span style="color:purple;">BIND</span> ( <span style="color:purple;">CONCAT</span> ( <span style="color:#1F618D;">?result_1</span> , <span style="color:#1F618D;">?result_3</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?result_4</span> ) .
   <span style="color:purple;">BIND</span> ( <span style="color:purple;">IRI</span> ( <span style="color:#1F618D;">?result_4</span> ) <span style="color:purple;">AS</span> <span style="color:#1F618D;">?predicate</span> ) .  
 }</div>
             </section>
