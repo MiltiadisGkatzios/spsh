@@ -10,7 +10,7 @@ RewriteCond %{HTTP_ACCEPT} application/x-turtle
 RewriteRule ^example/?$ https://miltiadisgkatzios.github.io/spsh/data/examples.ttl [R=303,L]
 
 # All other requests (browsers) → ReSpec HTML page
-RewriteRule ^$ https://miltiadisgkatzios.github.io/shsp/ [R=303,L]
+RewriteRule ^$ https://miltiadisgkatzios.github.io/spsh/ [R=303,L]
 RewriteRule ^example/?$ https://miltiadisgkatzios.github.io/spsh/ [R=303,L]
 
 # Sub-paths: function, operator, symbol fragments → HTML page
