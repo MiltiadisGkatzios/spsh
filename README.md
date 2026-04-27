@@ -24,7 +24,7 @@ The SPSH ontology and example files are located in the `data/` folder of this re
 You can also access the files directly via GitHub Pages:  
 
 ```text
-https://w3id.org/shsp/data/
+https://w3id.org/spsh/data/
 ```
 
 ---
@@ -39,4 +39,4 @@ You may copy, distribute, and adapt this work for non-commercial purposes, with 
 ## Citation
 If you use this repository in research or projects, please cite:
 Miltiadis Gkatzios. (2026). SPSH Ontology. 
-https://w3id.org/shsp/
+https://w3id.org/spsh/
