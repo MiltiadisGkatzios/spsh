@@ -1,6 +1,6 @@
-# shsp
+# spsh
 
-Persistent identifier space for the SHACL-SPARQL Functions Ontology.
+Persistent identifier space for the SPSH Ontology.
 
 ## Maintainer
 
@@ -11,11 +11,11 @@ Persistent identifier space for the SHACL-SPARQL Functions Ontology.
 
 | Request | Accept header | Redirects to |
 |---|---|---|
-| `https://w3id.org/shsp/` | `text/html` (browser) | https://miltiadisgkatzios.github.io/shsp/ |
-| `https://w3id.org/shsp/` | `text/turtle` | https://miltiadisgkatzios.github.io/shsp/data/ontology.ttl |
-| `https://w3id.org/shsp/example/` | `text/html` | https://miltiadisgkatzios.github.io/shsp/ |
-| `https://w3id.org/shsp/example/` | `text/turtle` | https://miltiadisgkatzios.github.io/shsp/data/examples.ttl |
+| `https://w3id.org/spsh/` | `text/html` (browser) | https://miltiadisgkatzios.github.io/spsh/ |
+| `https://w3id.org/spsh/` | `text/turtle` | https://miltiadisgkatzios.github.io/spsh/data/ontology.ttl |
+| `https://w3id.org/spsh/example/` | `text/html` | https://miltiadisgkatzios.github.io/spsh/ |
+| `https://w3id.org/spsh/example/` | `text/turtle` | https://miltiadisgkatzios.github.io/spsh/data/examples.ttl |
 
 ## Source
 
-https://github.com/MiltiadisGkatzios/shsp
+https://github.com/MiltiadisGkatzios/spsh
