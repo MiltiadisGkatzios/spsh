@@ -1,7 +1,4 @@
-Options -MultiViews
-Header set Access-Control-Allow-Origin *
-
-# Content negotiation: Turtle requests → raw TTL file
+Options +FollowSymLinks
 RewriteEngine on
 
 RewriteCond %{HTTP_ACCEPT} text/turtle [OR]
