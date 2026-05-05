@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPSH Ontology</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 56px;
+        background: #ffffff;
+        font-family: Inter, Arial, sans-serif;
+        color: #1e293b;
+        line-height: 1.75;
+      }
+
+      .container                    { max-width: 1100px; margin: auto;}
+
+      .document-title               { font-size: 2.5em; font-weight: 700; color: #005a9c; margin-bottom: 0.2em; }
+      .document-date                { color: #005a9c; font-size: 1.5em; margin-top: 0;  margin-bottom: 1.5em; }
+
+      .function-section             { margin-bottom: 72px; }
+      .function-header              { background: linear-gradient(90deg, #0f4c81, #2563a6); color: white; padding: 20px 28px; border-radius: 10px; margin-bottom: 34px; }
+      .function-header h1           { margin: 0; font-size: 1.8rem; font-weight: 700; letter-spacing: 0.02em; }
+
+      .content-section              { margin-bottom: 42px; }
+
+      .section-title                { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: #7b8794; font-weight: 600; margin-bottom: 24px; }
+
+      .metadata-grid                { display: grid; grid-template-columns: 220px 1fr; gap: 10px 32px; align-items: start; }
+      .parameter-grid               { display: grid; grid-template-columns: 220px 1fr; gap: 10px 32px; align-items: start; }
+      .execution-grid               { display: grid; grid-template-columns: 220px 1fr; gap: 10px 32px; align-items: start; }
+
+      .predicate                    { color: #475569; font-weight: 500; }
+
+      .value                        { color: #1e293b; }
+
+      .uri-link                     { color: #0f4c81; text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+      .uri-link:hover               { color: #2563a6; }
+
+      .identifier                   { font-family: "SFMono-Regular", Consolas, monospace; color: #0f4c81; font-size: 0.94rem; }
+
+      .parameter-group              { padding-top: 14px; margin-top: 14px; border-top: 1px solid #eef2f7; }
+      .parameter-group:first-child  { border-top: none; padding-top: 0; margin-top: 0; }
+
+      pre {
+        margin: 0;
+        background: transparent;
+        border: none;
+        padding: 0;
+        overflow-x: auto;
+        color: #1e293b;
+        font-size: 0.95rem;
+        line-height: 1.8;
+      }
+
+      code {
+        font-family: "SFMono-Regular", Consolas, monospace;
+      }
+
+      @media (max-width: 850px) {
+        body {
+          padding: 28px;
+        }
+
+        .metadata-grid,
+        .parameter-grid,
+        .execution-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <div class="document-title">SPSH ontology</div>
+      <div class="document-date">19 April 2026</div>
+
+      <section class="function-section" id="ABS">
+        <div class="function-header">
+          <h1>ABS</h1>
+          <div>https://w3id.org/spsh/def#ABS</div>
+        </div>
+        <div class="content-section">
+          <div class="section-title">Metadata</div>
+          <div class="metadata-grid">
+
+            <div class="predicate"> <a href="https://www.w3.org/1999/02/22-rdf-syntax-ns#type" class="uri-link" target="_blank">rdf:type</a></div>
+            <div class="value"><a href="https://www.w3.org/ns/shacl#SPARQLFunction" class="uri-link" target="_blank">sh:SPARQLFunction</a></div>
+
+            <div class="predicate"><a href="https://www.w3.org/2000/01/rdf-schema#label" class="uri-link" target="_blank">rdfs:label</a></div>
+            <div class="value">SPARQL function ABS</div>
+
+            <div class="predicate"><a href="https://www.w3.org/2000/01/rdf-schema#comment" class="uri-link" target="_blank">rdfs:comment</a></div>
+            <div class="value">
+              Returns the absolute value of arg. An error is raised if arg is not a numeric value.
+              This function is the same as fn:numeric-abs for terms with a datatype from XDM.
+            </div>
+
+            <div class="predicate"><a href="https://www.w3.org/2000/01/rdf-schema#seeAlso" class="uri-link" target="_blank">rdfs:seeAlso</a></div>
+            <div class="value"><a href="https://www.w3.org/TR/sparql11-query/#func-abs" class="uri-link" target="_blank">https://www.w3.org/TR/sparql11-query/#func-abs</a>          </div>
+          </div>
+        </div>
+        <div class="content-section">
+          <div class="section-title">Parameter(s)</div>
+          <div class="parameter-grid" style="margin-bottom:26px;">
+
+            <div class="predicate"><a href="https://www.w3.org/ns/shacl#parameter" class="uri-link" target="_blank">sh:parameter</a></div>
+            <div class="value identifier"></div>
+
+            <div class="predicate" style="padding-left:24px;"><a href="https://www.w3.org/ns/shacl#path" class="uri-link" target="_blank">sh:path</a></div>
+            <div class="value identifier">https://w3id.org/spsh/def#arg_1</div>
+
+            <div class="predicate" style="padding-left:24px;"><a href="https://www.w3.org/ns/shacl#optional" class="uri-link" target="_blank">sh:optional</a></div>
+            <div class="value">true</div>
+
+            <div class="predicate" style="padding-left:24px;"><a href="https://www.w3.org/ns/shacl#order" class="uri-link" target="_blank">sh:order</a></div>
+            <div class="value">1</div>
+          </div>
+        </div>
+        <div class="content-section">
+          <div class="section-title">Execution</div>
+          <div class="execution-grid">
+
+            <div class="predicate"><a href="https://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
+            <div class="value"><pre><code>SELECT DISTINCT ?result
+WHERE { 
+  BIND ( ABS ( ?arg_1 ) AS ?result ) 
+}</code></pre></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </body>
+</html>
