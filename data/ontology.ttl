@@ -40,7 +40,6 @@ spsh:ADD
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "A function to represent the operator symbol '+' which is used with SPARQL functions." ;
   rdfs:label "SPARQL math operator add" ;
-  rdfs:seeAlso "https://www.w3.org/TR/xpath-functions/#func-numeric-add"^^xsd:anyUri ;
   sh:parameter [
       sh:path spsh:arg_1 ;
       sh:optional "true"^^xsd:boolean ;
@@ -62,7 +61,7 @@ spsh:ADD
 spsh:AND
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "Returns a logical AND of left and right. Note that logical-and operates on the effective boolean value of its arguments." ;
-  rdfs:label "SPARQL logical operator LOGICAL-AND" ;
+  rdfs:label "SPARQL logical function LOGICAL-AND" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-logical-and"^^xsd:anyUri ;
   sh:parameter [
       sh:path spsh:arg_1 ;
@@ -164,7 +163,7 @@ spsh:COALESCE
   sh:select """
     SELECT DISTINCT ?result
     WHERE {
-      BIND ( COALESCE ( ?arg_1, ?arg_2 ) AS ?result)
+      BIND ( COALESCE ( ?arg_1, ?arg_2 ) AS ?result )
     }
     """ ;
 .
@@ -222,7 +221,7 @@ spsh:CONTAINS
 
 spsh:DATATYPE
   rdf:type sh:SPARQLFunction ;
-  rdfs:comment "Returns the datatype IRI of a literal. If the literal is a typed literal, return the datatype IRI. If the literal is a simple literal, return xsd:string. If the literal is literal with a language tag, return rdf:langString" ;
+  rdfs:comment "Returns the datatype IRI of a literal. If the literal is a typed literal, return the datatype IRI. If the literal is a simple literal, return xsd:string. If the literal is literal with a language tag, return rdf:langString." ;
   rdfs:label "SPARQL function DATATYPE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-datatype"^^xsd:anyUri ;
   sh:parameter [
@@ -234,7 +233,7 @@ spsh:DATATYPE
   sh:select """
     SELECT DISTINCT ?result
     WHERE {
-      BIND ( DATATYPE ( ?arg_1 ) AS ?result)
+      BIND ( DATATYPE ( ?arg_1 ) AS ?result )
     }
     """ ;
 .
@@ -295,7 +294,7 @@ spsh:ENCODE_FOR_URI
   sh:select """
     SELECT DISTINCT ?result
     WHERE {
-      BIND ( ENCODE_FOR_URI ( ?arg_1 ) AS ?result)
+      BIND ( ENCODE_FOR_URI ( ?arg_1 ) AS ?result )
     }
     """ ;
 .
@@ -303,7 +302,7 @@ spsh:ENCODE_FOR_URI
 spsh:EQUALS
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "Returns TRUE if term1 and term2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax [CONCEPTS]; produces a type error if the arguments are both literal but are not the same RDF term ; returns FALSE otherwise." ;
-  rdfs:label "SPARQL math operator RDFTERM-EQUAL" ;
+  rdfs:label "SPARQL math function RDFTERM-EQUAL" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-RDFterm-equal"^^xsd:anyUri ;
   sh:parameter [
       sh:path spsh:arg_1 ;
@@ -329,7 +328,7 @@ spsh:EQUALS
 spsh:EXCLAMATION_MARK
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "A function to represent the symbol '!' which is used with SPARQL functions." ;
-  rdfs:label "SPARQL logical symbol not" ;
+  rdfs:label "SPARQL logical function not" ;
   sh:parameter [
       sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
@@ -347,7 +346,7 @@ spsh:EXCLAMATION_MARK
 
 spsh:EXISTS
   rdf:type sh:SPARQLFunction ;
-  rdfs:comment "There is a filter operator EXISTS that takes a graph pattern. EXISTS returns true/false depending on whether the pattern matches the dataset given the bindings in the current group graph pattern, the dataset and the active graph at this point in the query evaluation. No additional binding of variables occurs. The NOT EXISTS form translates into fn:not(EXISTS{...}). Returns true if pattern matches. Returns false otherwise. " ;
+  rdfs:comment "There is a filter operator EXISTS that takes a graph pattern. EXISTS returns true/false depending on whether the pattern matches the dataset given the bindings in the current group graph pattern, the dataset and the active graph at this point in the query evaluation. No additional binding of variables occurs. The NOT EXISTS form translates into fn:not(EXISTS{...}). Returns true if pattern matches. Returns false otherwise." ;
   rdfs:label "SPARQL function EXISTS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-filter-exists"^^xsd:anyUri ;
   sh:parameter [
@@ -497,7 +496,7 @@ spsh:IF
   sh:select """
     SELECT DISTINCT ?result
     WHERE {
-      BIND ( IF ( ?arg_1, ?arg_2, ?arg_3 ) AS ?result)
+      BIND ( IF ( ?arg_1, ?arg_2, ?arg_3 ) AS ?result )
     }
     """ ;
 .
@@ -541,7 +540,7 @@ spsh:IRI
   sh:select """
     SELECT DISTINCT ?result
     WHERE {
-      BIND ( IRI ( ?arg_1 ) AS ?result)
+      BIND ( IRI ( ?arg_1 ) AS ?result )
     }
     """ ;
 .
@@ -849,7 +848,7 @@ spsh:MULTIPLY
 
 spsh:NOT_EXISTS
   rdf:type sh:SPARQLFunction ;
-  rdfs:comment "There is a filter operator EXISTS that takes a graph pattern. EXISTS returns true/false depending on whether the pattern matches the dataset given the bindings in the current group graph pattern, the dataset and the active graph at this point in the query evaluation. No additional binding of variables occurs. The NOT EXISTS form translates into fn:not(EXISTS{...}). Returns false if pattern matches. Returns true otherwise. " ;
+  rdfs:comment "There is a filter operator EXISTS that takes a graph pattern. EXISTS returns true/false depending on whether the pattern matches the dataset given the bindings in the current group graph pattern, the dataset and the active graph at this point in the query evaluation. No additional binding of variables occurs. The NOT EXISTS form translates into fn:not(EXISTS{...}). Returns false if pattern matches. Returns true otherwise." ;
   rdfs:label "SPARQL function NOT EXISTS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-filter-exists"^^xsd:anyUri ;
   sh:parameter [
@@ -881,8 +880,7 @@ spsh:NOT_EXISTS
 spsh:NOT_EQUALS
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "Returns TRUE if term1 and term2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax [CONCEPTS]; produces a type error if the arguments are both literal but are not the same RDF term ; returns FALSE otherwise." ;
-  rdfs:label "SPARQL math operator RDFTERM-EQUAL" ;
-  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-RDFterm-equal"^^xsd:anyUri ;
+  rdfs:label "SPARQL math function not equal" ;
   sh:parameter [
       sh:path spsh:arg_1 ;
       sh:name "term 1" ;
@@ -1192,7 +1190,7 @@ spsh:SHA512
   sh:select """
     SELECT DISTINCT ?result
     WHERE {
-      BIND ( SHA512 ( ?arg_1 ) AS ?result)
+      BIND ( SHA512 ( ?arg_1 ) AS ?result )
     }
     """ ;
 .
@@ -1384,7 +1382,7 @@ spsh:STRSTARTS
   sh:select """
     SELECT DISTINCT ?result
     WHERE {
-      BIND ( STRSTARTS ( ?arg_1 , ?arg_2) AS ?result )
+      BIND ( STRSTARTS ( ?arg_1 , ?arg_2 ) AS ?result )
     }
     """ ;
 .
@@ -1397,7 +1395,7 @@ spsh:STRUUID
   sh:select """
     SELECT DISTINCT ?result
     WHERE {
-      BIND ( STRUUID ( ) AS ?result)
+      BIND ( STRUUID ( ) AS ?result )
     }
     """ ;
 .
