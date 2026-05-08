@@ -7,7 +7,7 @@
 @prefix spsh: <https://w3id.org/spsh/def#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/spsh/>
+<https://miltiadisgkatzios.github.io/spsh/data/ontology.ttl>
   rdf:type owl:Ontology ;
   dc:creator "Miltiadis Gkatzios" ;
   dcterms:created "2023-12-18"^^xsd:date ;
