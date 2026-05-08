@@ -78,8 +78,8 @@ spsh:AND
       sh:order 2 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
-    SELECT ?result
+  sh:select """
+    SELECT DISTINCT ?result
     WHERE {
       BIND ( ( ?arg_1 && ?arg_2 ) AS ?result )
     }
@@ -117,7 +117,7 @@ spsh:BOUND
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
-    SELECT ?result
+    SELECT DISTINCT ?result
     WHERE {
       BIND ( BOUND ( ?arg_1 ) AS ?result )
     }
@@ -212,7 +212,7 @@ spsh:CONTAINS
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
-    SELECT ?result
+    SELECT DISTINCT ?result
     WHERE {
       BIND ( CONTAINS ( ?arg_1 , ?arg_2 ) AS ?result )
     }
@@ -318,7 +318,7 @@ spsh:EQUALS
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
-    SELECT ?result
+    SELECT DISTINCT ?result
     WHERE {
       BIND ( ( ?arg_1 = ?arg_2 ) AS ?result )
     }
@@ -337,7 +337,7 @@ spsh:EXCLAMATION_MARK
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
-    SELECT ?result
+    SELECT DISTINCT ?result
     WHERE {
       BIND ( ( ?arg_1 = FALSE ) AS ?result )
     }
@@ -413,7 +413,7 @@ spsh:GREATER_THAN
       sh:order 2 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ( ?arg_1 > ?arg_2 ) AS ?result )
@@ -440,7 +440,7 @@ spsh:GREATER_THAN_OR_EQUALS
       sh:order 2 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ( ?arg_1 >= ?arg_2 ) AS ?result )
@@ -557,7 +557,7 @@ spsh:ISBLANK
       sh:order 1 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ISBLANK ( ?arg_1 ) AS ?result )
@@ -577,7 +577,7 @@ spsh:ISIRI
       sh:order 1 ;
     ] ;
   sh:returnType xsd:boolean ;  
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ISIRI ( ?arg_1 ) AS ?result )
@@ -597,7 +597,7 @@ spsh:ISLITERAL
       sh:order 1 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ISLITERAL ( ?arg_1 ) AS ?result )
@@ -617,7 +617,7 @@ spsh:ISNUMERIC
       sh:order 1 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ISNUMERIC ( ?arg_1 ) AS ?result )
@@ -636,7 +636,7 @@ spsh:ISURI
       sh:order 1 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ISURI ( ?arg_1 ) AS ?result )
@@ -709,25 +709,6 @@ spsh:LCASE
     """ ;
 .
 
-spsh:MD5
-  rdf:type sh:SPARQLFunction ;
-  rdfs:comment "Returns the MD5 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits should be in lower case." ;
-  rdfs:label "SPARQL function MD5" ;
-  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-md5"^^xsd:anyUri ;
-  sh:parameter [
-      sh:path spsh:arg_1 ;
-      sh:name "arg" ;
-      sh:optional "true"^^xsd:boolean ;
-      sh:order 1 ;
-    ] ;
-  sh:select """
-    SELECT DISTINCT ?result
-    WHERE {
-      BIND ( MD5 ( ?arg_1 ) AS ?result )
-    }
-    """ ;
-.
-
 spsh:LESS_THAN
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "A function to represent the operator symbol '<' which is used with SPARQL functions." ;
@@ -747,7 +728,7 @@ spsh:LESS_THAN
       sh:order 2 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ( ?arg_1 < ?arg_2 ) AS ?result )
@@ -774,10 +755,29 @@ spsh:LESS_THAN_OR_EQUALS
       sh:order 2 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ( ?arg_1 <= ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
+spsh:MD5
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns the MD5 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits should be in lower case." ;
+  rdfs:label "SPARQL function MD5" ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-md5"^^xsd:anyUri ;
+  sh:parameter [
+      sh:path spsh:arg_1 ;
+      sh:name "arg" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( MD5 ( ?arg_1 ) AS ?result )
     }
     """ ;
 .
@@ -846,6 +846,31 @@ spsh:MULTIPLY
     """ ;
 .
 
+spsh:NOT_EQUALS
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Returns TRUE if term1 and term2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax [CONCEPTS]; produces a type error if the arguments are both literal but are not the same RDF term ; returns FALSE otherwise." ;
+  rdfs:label "SPARQL math function not equal" ;
+  sh:parameter [
+      sh:path spsh:arg_1 ;
+      sh:name "term 1" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:parameter [
+      sh:path spsh:arg_2 ;
+      sh:name "term 2" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:returnType xsd:boolean ;
+  sh:select """
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 != ?arg_2 ) AS ?result )
+    }
+    """ ;
+.
+
 spsh:NOT_EXISTS
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "There is a filter operator EXISTS that takes a graph pattern. EXISTS returns true/false depending on whether the pattern matches the dataset given the bindings in the current group graph pattern, the dataset and the active graph at this point in the query evaluation. No additional binding of variables occurs. The NOT EXISTS form translates into fn:not(EXISTS{...}). Returns false if pattern matches. Returns true otherwise." ;
@@ -873,31 +898,6 @@ spsh:NOT_EXISTS
     SELECT DISTINCT ?result
     WHERE {
       BIND ( NOT EXISTS { ?arg_1 ?arg_2 ?arg_3 } AS ?result )
-    }
-    """ ;
-.
-
-spsh:NOT_EQUALS
-  rdf:type sh:SPARQLFunction ;
-  rdfs:comment "Returns TRUE if term1 and term2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax [CONCEPTS]; produces a type error if the arguments are both literal but are not the same RDF term ; returns FALSE otherwise." ;
-  rdfs:label "SPARQL math function not equal" ;
-  sh:parameter [
-      sh:path spsh:arg_1 ;
-      sh:name "term 1" ;
-      sh:optional "true"^^xsd:boolean ;
-      sh:order 1 ;
-    ] ;
-  sh:parameter [
-      sh:path spsh:arg_2 ;
-      sh:name "term 2" ;
-      sh:optional "true"^^xsd:boolean ;
-      sh:order 2 ;
-    ] ;
-  sh:returnType xsd:boolean ;
-  sh:select """
-    SELECT ?result
-    WHERE {
-      BIND ( ( ?arg_1 != ?arg_2 ) AS ?result )
     }
     """ ;
 .
@@ -962,7 +962,7 @@ spsh:OR
       sh:order 2 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( ( ?arg_1 || ?arg_2 ) AS ?result )
@@ -1008,7 +1008,7 @@ spsh:REGEX
       sh:order 3 ;
     ]  ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( IF ( BOUND ( ?arg_3 ), REGEX ( ?arg_1 , ?arg_2, ?arg_3 ), REGEX ( ?arg_1 , ?arg_2 ) ) AS ?result )
@@ -1090,7 +1090,7 @@ spsh:SAMETERM
       sh:order 2 ;
     ] ;
   sh:returnType xsd:boolean ;
-  sh:select """ 
+  sh:select """
     SELECT DISTINCT ?result
     WHERE {
       BIND ( SAMETERM ( ?arg_1 , ?arg_2 ) AS ?result )
