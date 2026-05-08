@@ -58,7 +58,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( ABS ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ABS ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -104,7 +107,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {   BIND ( ( ?arg_1 + ?arg_2 ) AS ?result ) }</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE { 
+      BIND ( ( ?arg_1 + ?arg_2 ) AS ?result ) 
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -162,7 +168,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT ?resultWHERE {  BIND ( ( ?arg_1 && ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT ?result
+    WHERE {
+      BIND ( ( ?arg_1 && ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -202,7 +212,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( IF ( BOUND ( ?arg_1 ), BNODE ( ?arg_1 ), BNODE ( ) ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( BOUND ( ?arg_1 ), BNODE ( ?arg_1 ), BNODE ( ) ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -246,7 +259,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT ?resultWHERE {  BIND ( BOUND ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT ?result
+    WHERE {
+      BIND ( BOUND ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -288,7 +304,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( CEIL ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( CEIL ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -340,7 +359,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( COALESCE ( ?arg_1, ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( COALESCE ( ?arg_1, ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -392,7 +414,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( CONCAT ( ?arg_1, ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( CONCAT ( ?arg_1, ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -446,7 +471,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT ?resultWHERE {  BIND ( CONTAINS ( ?arg_1 , ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT ?result
+    WHERE {
+      BIND ( CONTAINS ( ?arg_1 , ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -488,7 +516,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( DATATYPE ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( DATATYPE ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -534,7 +565,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#integer" class="uri-link" target="_blank">xsd:integer</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( DAY ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( DAY ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -580,7 +614,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {    BIND ( ( ?arg_1 / ?arg_2 ) AS ?result ) }</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {  
+      BIND ( ( ?arg_1 / ?arg_2 ) AS ?result ) 
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -622,7 +659,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( ENCODE_FOR_URI ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ENCODE_FOR_URI ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -676,7 +716,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT ?resultWHERE {  BIND ( ( ?arg_1 = ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT ?result
+    WHERE {
+      BIND ( ( ?arg_1 = ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -718,7 +761,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT ?resultWHERE {  BIND ( ( ?arg_1 = FALSE ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT ?result
+    WHERE {
+      BIND ( ( ?arg_1 = FALSE ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -780,7 +826,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( EXISTS { ?arg_1 ?arg_2 ?arg_3 } AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( EXISTS { ?arg_1 ?arg_2 ?arg_3 } AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -822,7 +871,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( FLOOR ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( FLOOR ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -878,7 +930,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ( ?arg_1 > ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 > ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -934,7 +990,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ( ?arg_1 >= ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 >= ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -980,7 +1040,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#integer" class="uri-link" target="_blank">xsd:integer</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( HOURS ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( HOURS ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1044,7 +1107,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( IF ( ?arg_1, ?arg_2, ?arg_3 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( ?arg_1, ?arg_2, ?arg_3 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1098,7 +1164,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( ( ?arg_1 IN ( ?arg_2 ) ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 IN ( ?arg_2 ) ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1138,7 +1207,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( IRI ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IRI ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1182,7 +1254,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ISBLANK ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISBLANK ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1226,7 +1302,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ISIRI ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISIRI ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1270,7 +1350,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ISLITERAL ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISLITERAL ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1314,7 +1398,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ISNUMERIC ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISNUMERIC ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1358,7 +1446,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ISURI ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ISURI ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1402,7 +1494,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#string" class="uri-link" target="_blank">xsd:string</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( LANG ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( LANG ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1456,7 +1551,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( LANGMATCHES ( ?arg_1 , ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( LANGMATCHES ( ?arg_1 , ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1498,7 +1596,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( LCASE ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( LCASE ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1540,7 +1641,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( MD5 ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( MD5 ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1596,7 +1700,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ( ?arg_1 < ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 < ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1652,7 +1760,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ( ?arg_1 <= ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 <= ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1698,7 +1810,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#integer" class="uri-link" target="_blank">xsd:integer</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( MINUTES ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( MINUTES ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1744,7 +1859,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#integer" class="uri-link" target="_blank">xsd:integer</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( MONTH ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( MONTH ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1790,7 +1908,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {   BIND ( ( ?arg_1 * ?arg_2 ) AS ?result ) }</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE { 
+      BIND ( ( ?arg_1 * ?arg_2 ) AS ?result ) 
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1852,7 +1973,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( NOT EXISTS { ?arg_1 ?arg_2 ?arg_3 } AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( NOT EXISTS { ?arg_1 ?arg_2 ?arg_3 } AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1904,7 +2028,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT ?resultWHERE {  BIND ( ( ?arg_1 != ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT ?result
+    WHERE {
+      BIND ( ( ?arg_1 != ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1958,7 +2085,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( ( ?arg_1 NOT IN ( ?arg_2, ?arg_3 ) ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 NOT IN ( ?arg_2, ?arg_3 ) ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -1992,7 +2122,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#dateTime" class="uri-link" target="_blank">xsd:dateTime</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( NOW ( ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( NOW ( ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2050,7 +2183,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( ( ?arg_1 || ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ( ?arg_1 || ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2084,7 +2221,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#double" class="uri-link" target="_blank">xsd:double</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( RAND ( ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( RAND ( ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2148,7 +2288,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( IF ( BOUND ( ?arg_3 ), REGEX ( ?arg_1 , ?arg_2, ?arg_3 ), REGEX ( ?arg_1 , ?arg_2 ) ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( BOUND ( ?arg_3 ), REGEX ( ?arg_1 , ?arg_2, ?arg_3 ), REGEX ( ?arg_1 , ?arg_2 ) ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2220,7 +2364,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( IF ( BOUND ( ?arg_4 ), REPLACE ( ?arg_1 , ?arg_2, ?arg_3, ?arg_4 ), REPLACE ( ?arg_1 , ?arg_2, ?arg_3 ) ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( BOUND ( ?arg_4 ), REPLACE ( ?arg_1 , ?arg_2, ?arg_3, ?arg_4 ), REPLACE ( ?arg_1 , ?arg_2, ?arg_3 ) ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2262,7 +2409,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( ROUND ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( ROUND ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2316,7 +2466,11 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code> SELECT DISTINCT ?resultWHERE {  BIND ( SAMETERM ( ?arg_1 , ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code> 
+    SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SAMETERM ( ?arg_1 , ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2362,7 +2516,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#integer" class="uri-link" target="_blank">xsd:integer</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( SECONDS ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SECONDS ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2404,7 +2561,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( SHA1 ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SHA1 ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2446,7 +2606,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( SHA256 ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SHA256 ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2488,7 +2651,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( SHA384 ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SHA384 ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2530,7 +2696,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( SHA512 ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( SHA512 ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2574,7 +2743,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#string" class="uri-link" target="_blank">xsd:string</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STR ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STR ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2626,7 +2798,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STRAFTER ( ?arg_1 , ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRAFTER ( ?arg_1 , ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2678,7 +2853,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STRBEFORE ( ?arg_1 , ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRBEFORE ( ?arg_1 , ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2730,7 +2908,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STRDT ( ?arg_1, ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRDT ( ?arg_1, ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2784,7 +2965,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STRENDS ( ?arg_1 , ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRENDS ( ?arg_1 , ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2838,7 +3022,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString" class="uri-link" target="_blank">rdf:langString</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STRLANG ( ?arg_1, ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRLANG ( ?arg_1, ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2882,7 +3069,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#integer" class="uri-link" target="_blank">xsd:integer</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STRLEN ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRLEN ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2936,7 +3126,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#boolean" class="uri-link" target="_blank">xsd:boolean</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STRSTARTS ( ?arg_1 , ?arg_2 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRSTARTS ( ?arg_1 , ?arg_2 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -2968,7 +3161,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( STRUUID ( ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( STRUUID ( ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3034,7 +3230,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( IF ( BOUND ( ?arg_3 ), SUBSTR ( ?arg_1 , ?arg_2, ?arg_3 ), SUBSTR ( ?arg_1 , ?arg_2 ) ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( IF ( BOUND ( ?arg_3 ), SUBSTR ( ?arg_1 , ?arg_2, ?arg_3 ), SUBSTR ( ?arg_1 , ?arg_2 ) ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3080,7 +3279,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {   BIND ( ( ?arg_1 - ?arg_2 ) AS ?result ) }</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE { 
+      BIND ( ( ?arg_1 - ?arg_2 ) AS ?result ) 
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3126,7 +3328,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#dayTimeDuration" class="uri-link" target="_blank">xsd:dayTimeDuration</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( TIMEZONE ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( TIMEZONE ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3170,7 +3375,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( TZ ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( TZ ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3212,7 +3420,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( UCASE ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( UCASE ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3242,7 +3453,9 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3282,7 +3495,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( URI ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( URI ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3314,7 +3530,10 @@
 		<div class="section-title">Execution</div>
 		<div class="execution-grid">
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( UUID ( ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( UUID ( ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
@@ -3360,7 +3579,10 @@
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#returnType" class="uri-link" target="_blank">sh:returnType</a></div>
 			<div class="value"><a href="http://www.w3.org/2001/XMLSchema#integer" class="uri-link" target="_blank">xsd:integer</a></div>
 			<div class="predicate"><a href="http://www.w3.org/ns/shacl#select" class="uri-link" target="_blank">sh:select</a></div>
-			<div class="value"><pre><code>SELECT DISTINCT ?resultWHERE {  BIND ( YEAR ( ?arg_1 ) AS ?result )}</code></pre></div>
+			<div class="value"><pre><code>SELECT DISTINCT ?result
+    WHERE {
+      BIND ( YEAR ( ?arg_1 ) AS ?result )
+    }</code></pre></div>
 		</div>
 	</div>
 </section>
