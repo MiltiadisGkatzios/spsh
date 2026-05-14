@@ -23,10 +23,10 @@ spsh:ABS
   rdfs:label "SPARQL function ABS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-abs"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term" ;
-      sh:order 1 ;
       sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -41,14 +41,14 @@ spsh:ADD
   rdfs:comment "A function to represent the operator symbol '+' which is used with SPARQL functions." ;
   rdfs:label "SPARQL math operator add" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
   ]  ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
   ]  ;
   sh:select """
     SELECT DISTINCT ?result
@@ -64,18 +64,18 @@ spsh:AND
   rdfs:label "SPARQL logical function LOGICAL-AND" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-logical-and"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
       sh:name "left" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:datatype xsd:boolean ;
       sh:name "right" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -92,9 +92,9 @@ spsh:BNODE
   rdfs:label "SPARQL function BNODE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-bnode"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -110,10 +110,10 @@ spsh:BOUND
   rdfs:label "SPARQL function BOUND" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-bound"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "var" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -130,10 +130,10 @@ spsh:CEIL
   rdfs:label "SPARQL function CEIL" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-ceil"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -149,16 +149,16 @@ spsh:COALESCE
   rdfs:label "SPARQL function COALESCE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-coalesce"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "expression 1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "expression 2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -174,16 +174,16 @@ spsh:CONCAT
   rdfs:label "SPARQL function CONCAT" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-concat"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "ltrl1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "ltrl2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -199,16 +199,16 @@ spsh:CONTAINS
   rdfs:label "SPARQL function CONTAINS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-contains"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "arg2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -225,10 +225,10 @@ spsh:DATATYPE
   rdfs:label "SPARQL function DATATYPE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-datatype"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "literal" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -243,11 +243,11 @@ spsh:DAY
   rdfs:label "SPARQL function DAY" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-day"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:dateTime ;
       sh:name "arg" ;     
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:integer ;
   sh:select """
@@ -262,15 +262,15 @@ spsh:DIVIDE
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "A function to represent the operator symbol '/' which is used with SPARQL functions." ;
   rdfs:label "SPARQL math operator divide" ;
-  sh:parameter [ 
-      sh:path spsh:arg_1 ;
+  sh:parameter [
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
   ]  ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
   ]  ;
   sh:select """
     SELECT DISTINCT ?result
@@ -286,10 +286,10 @@ spsh:ENCODE_FOR_URI
   rdfs:label "SPARQL function ENCODE FOR URI" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-encode"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "ltrl" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -305,16 +305,16 @@ spsh:EQUALS
   rdfs:label "SPARQL math function RDFTERM-EQUAL" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-RDFterm-equal"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term 1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "term 2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -330,10 +330,10 @@ spsh:EXCLAMATION_MARK
   rdfs:comment "A function to represent the symbol '!' which is used with SPARQL functions." ;
   rdfs:label "SPARQL logical function not" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -350,21 +350,21 @@ spsh:EXISTS
   rdfs:label "SPARQL function EXISTS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-filter-exists"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:nodeKind sh:BlankNodeOrIRI ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:nodeKind sh:IRI ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_3 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 3 ;
+      sh:path spsh:arg_3 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -381,10 +381,10 @@ spsh:FLOOR
   rdfs:label "SPARQL function FLOOR" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-floor"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -399,18 +399,18 @@ spsh:GREATER_THAN
   rdfs:comment "A function to represent the operator symbol '>' which is used with SPARQL functions." ;
   rdfs:label "SPARQL logical operator greater than" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
       sh:name "left" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:datatype xsd:boolean ;
       sh:name "right" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -426,18 +426,18 @@ spsh:GREATER_THAN_OR_EQUALS
   rdfs:comment "A function to represent the operator symbol '>=' which is used with SPARQL functions." ;
   rdfs:label "SPARQL logical operator greater than or equals" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
       sh:name "left" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:datatype xsd:boolean ;
       sh:name "right" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -454,11 +454,11 @@ spsh:HOURS
   rdfs:label "SPARQL function HOURS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-hours"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:dateTime ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:integer ;
   sh:select """
@@ -475,23 +475,23 @@ spsh:IF
   rdfs:label "SPARQL function IF" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-if"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
       sh:name "expression 1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "expression 2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_3 ;
       sh:name "expression 3" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 3 ;
+      sh:path spsh:arg_3 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -507,16 +507,16 @@ spsh:IN
   rdfs:label "SPARQL function IN" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-in"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
-      sh:optional "true"^^xsd:boolean ;
       sh:name "rdfTerm" ;
+      sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "expression" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -533,9 +533,9 @@ spsh:IRI
   rdfs:label "SPARQL function IRI" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-iri"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -551,10 +551,10 @@ spsh:ISBLANK
   rdfs:label "SPARQL function ISBLANK" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isBlank"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -571,10 +571,10 @@ spsh:ISIRI
   rdfs:label "SPARQL function ISIRI" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isIRI"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:boolean ;  
   sh:select """
@@ -591,10 +591,10 @@ spsh:ISLITERAL
   rdfs:label "SPARQL function ISLITERAL" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isLiteral"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -611,10 +611,10 @@ spsh:ISNUMERIC
   rdfs:label "SPARQL function ISNUMERIC" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isNumeric"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -629,11 +629,12 @@ spsh:ISURI
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "Returns true if term is an IRI. Returns false otherwise. isURI is an alternate spelling for the isIRI operator." ;
   rdfs:label "SPARQL function ISURI" ;
-  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isIRI"^^xsd:anyUri ;  sh:parameter [
-      sh:path spsh:arg_1 ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-isIRI"^^xsd:anyUri ;  
+  sh:parameter [
       sh:name "term" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -650,10 +651,10 @@ spsh:LANG
   rdfs:label "SPARQL function LANG" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-lang"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "ltrl" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:string ;
   sh:select """
@@ -670,16 +671,16 @@ spsh:LANGMATCHES
   rdfs:label "SPARQL function LANGMATCHES" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-langMatches"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "language-tag" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "language-range" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -696,10 +697,10 @@ spsh:LCASE
   rdfs:label "SPARQL function LCASE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-lcase"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "str" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -714,18 +715,18 @@ spsh:LESS_THAN
   rdfs:comment "A function to represent the operator symbol '<' which is used with SPARQL functions." ;
   rdfs:label "SPARQL logical operator less than" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
       sh:name "left" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:datatype xsd:boolean ;
       sh:name "right" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -741,18 +742,18 @@ spsh:LESS_THAN_OR_EQUALS
   rdfs:comment "A function to represent the operator symbol '<=' which is used with SPARQL functions." ;
   rdfs:label "SPARQL logical operator less than or equals" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
       sh:name "left" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:datatype xsd:boolean ;
       sh:name "right" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -769,10 +770,10 @@ spsh:MD5
   rdfs:label "SPARQL function MD5" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-md5"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -788,11 +789,11 @@ spsh:MINUTES
   rdfs:label "SPARQL function MINUTES" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-minutes"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:dateTime ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:integer ;
   sh:select """
@@ -809,11 +810,11 @@ spsh:MONTH
   rdfs:label "SPARQL function MONTH" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-month"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:dateTime ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:integer ;
   sh:select """
@@ -829,14 +830,14 @@ spsh:MULTIPLY
   rdfs:comment "A function to represent the operator symbol '*' which is used with SPARQL functions." ;
   rdfs:label "SPARQL math operator multiply" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
   ]  ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
   ]  ;
   sh:select """
     SELECT DISTINCT ?result
@@ -851,16 +852,16 @@ spsh:NOT_EQUALS
   rdfs:comment "Returns TRUE if term1 and term2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax [CONCEPTS]; produces a type error if the arguments are both literal but are not the same RDF term ; returns FALSE otherwise." ;
   rdfs:label "SPARQL math function not equal" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term 1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "term 2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -877,21 +878,21 @@ spsh:NOT_EXISTS
   rdfs:label "SPARQL function NOT EXISTS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-filter-exists"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:nodeKind sh:BlankNodeOrIRI ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:nodeKind sh:IRI ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_3 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 3 ;
+      sh:path spsh:arg_3 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -908,16 +909,16 @@ spsh:NOT_IN
   rdfs:label "SPARQL function NOT IN" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-not-in"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "rdfTerm" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "expression" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -948,18 +949,18 @@ spsh:OR
   rdfs:label "SPARQL logical function LOGICAL-OR" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-logical-or"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:boolean ;
       sh:name "left" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:datatype xsd:boolean ;
       sh:name "right" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -989,23 +990,23 @@ spsh:REGEX
   rdfs:comment "Invokes the XPath fn:matches function to match text against a regular expression pattern. The regular expression language is defined in XQuery 1.0 and XPath 2.0 Functions and Operators section 7.6.1 Regular Expression Syntax [FUNCOP]."^^xsd:string ;
   rdfs:label "SPARQL function REGEX"^^xsd:string ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-regex"^^xsd:anyUri ;
-  sh:parameter [ 
-      sh:path spsh:arg_1 ; 
+  sh:parameter [
       sh:name "text"^^xsd:string ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ; 
     ]  ;
   sh:parameter [ 
-      sh:path spsh:arg_2 ; 
       sh:name "pattern"^^xsd:string ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ]  ;
   sh:parameter [ 
-      sh:path spsh:arg_3 ; 
       sh:name "flags"^^xsd:string ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 3 ;
+      sh:path spsh:arg_3 ;
     ]  ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -1022,28 +1023,28 @@ spsh:REPLACE
   rdfs:label "SPARQL function REPLACE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-replace"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "pattern" ;   
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_3 ;
       sh:name "replacement" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 3 ;
+      sh:path spsh:arg_3 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_4 ;
       sh:name "flags" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 4 ;
+      sh:path spsh:arg_4 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1059,10 +1060,10 @@ spsh:ROUND
   rdfs:label "SPARQL function ROUND" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-round"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1078,16 +1079,16 @@ spsh:SAMETERM
   rdfs:label "SPARQL function SAMETERM" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sameTerm"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "term 1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "term 2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -1104,11 +1105,11 @@ spsh:SECONDS
   rdfs:label "SPARQL function SECONDS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-seconds"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:dateTime ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:integer ;
   sh:select """
@@ -1125,10 +1126,10 @@ spsh:SHA1
   rdfs:label "SPARQL function SHA1" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sha1"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1144,10 +1145,10 @@ spsh:SHA256
   rdfs:label "SPARQL function SHA256" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sha256"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1163,10 +1164,10 @@ spsh:SHA384
   rdfs:label "SPARQL function SHA384" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sha384"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1182,10 +1183,10 @@ spsh:SHA512
   rdfs:label "SPARQL function SHA512" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-sha512"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1201,10 +1202,10 @@ spsh:STR
   rdfs:label "SPARQL function STR" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-str"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "ltrl_or_rsrc" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:string ;
   sh:select """
@@ -1221,16 +1222,16 @@ spsh:STRAFTER
   rdfs:label "SPARQL function STRAFTER" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strafter"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "arg2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1246,16 +1247,16 @@ spsh:STRBEFORE
   rdfs:label "SPARQL function STRBEFORE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strbefore"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "arg2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1271,16 +1272,16 @@ spsh:STRDT
   rdfs:label "SPARQL function STRDT" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strdt"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "lexicalForm" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "datatypeIRI" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1296,16 +1297,16 @@ spsh:STRENDS
   rdfs:label "SPARQL function STRENDS" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strends"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "arg1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "arg2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -1322,16 +1323,16 @@ spsh:STRLANG
   rdfs:label "SPARQL function STRLANG" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strlang"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "lexicalForm" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "langTag" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType rdf:langString ;
   sh:select """
@@ -1348,10 +1349,10 @@ spsh:STRLEN
   rdfs:label "SPARQL function STRLEN" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strlen"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "str" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:integer ;
   sh:select """
@@ -1366,17 +1367,18 @@ spsh:STRSTARTS
   rdf:type sh:SPARQLFunction ;
   rdfs:comment "The STRSTARTS function corresponds to the XPath fn:starts-with function. The arguments must be argument compatible otherwise an error is raised. For such input pairs, the function returns true if the lexical form of arg1 starts with the lexical form of arg2, otherwise it returns false." ;
   rdfs:label "SPARQL function STRSTARTS" ;
-  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strstarts"^^xsd:anyUri ;  sh:parameter [
-      sh:path spsh:arg_1 ;
+  rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-strstarts"^^xsd:anyUri ;  
+  sh:parameter [
       sh:name "arg1" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:name "arg2" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:returnType xsd:boolean ;
   sh:select """
@@ -1406,24 +1408,24 @@ spsh:SUBSTR
   rdfs:label "SPARQL function SUBSTR" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-substr"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "source" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:datatype xsd:integer ;
       sh:name "startingLoc" ;     
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
     ] ;
   sh:parameter [
-      sh:path spsh:arg_3 ;
       sh:datatype xsd:integer ;
       sh:name "length" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 3 ;
+      sh:path spsh:arg_3 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1438,14 +1440,14 @@ spsh:SUBTRACT
   rdfs:comment "A function to represent the operator symbol '-' which is used with SPARQL functions." ;
   rdfs:label "SPARQL math operator subtract" ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
   ]  ;
   sh:parameter [
-      sh:path spsh:arg_2 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 2 ;
+      sh:path spsh:arg_2 ;
   ]  ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1461,11 +1463,11 @@ spsh:TIMEZONE
   rdfs:label "SPARQL function TIMEZONE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-timezone"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:dateTime ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:dayTimeDuration ;
   sh:select """
@@ -1482,11 +1484,11 @@ spsh:TZ
   rdfs:label "SPARQL function TZ" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-tz"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:dateTime ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1502,10 +1504,10 @@ spsh:UCASE
   rdfs:label "SPARQL function UCASE" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-ucase"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:name "str" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1532,9 +1534,9 @@ spsh:URI
   rdfs:label "SPARQL function URI" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-iri"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:select """
     SELECT DISTINCT ?result
@@ -1563,11 +1565,11 @@ spsh:YEAR
   rdfs:label "SPARQL function YEAR" ;
   rdfs:seeAlso "https://www.w3.org/TR/sparql11-query/#func-year"^^xsd:anyUri ;
   sh:parameter [
-      sh:path spsh:arg_1 ;
       sh:datatype xsd:dateTime ;
       sh:name "arg" ;
       sh:optional "true"^^xsd:boolean ;
       sh:order 1 ;
+      sh:path spsh:arg_1 ;
     ] ;
   sh:returnType xsd:integer ;
   sh:select """
