@@ -20,12 +20,11 @@ The ontology is intended to help users **standardize SPARQL queries within SHACL
 
 ## Files
 
-The SPSH ontology and example files are located in the `data/` folder of this repository:  
+The SPSH ontology and example files are located in the `data/` folder of this repository.  
 You can also access the files directly via GitHub Pages:  
 
-```text
-https://w3id.org/spsh/data/
-```
+- [ontology.ttl](https://miltiadisgkatzios.github.io/spsh/data/ontology.ttl)  
+- [examples.ttl](https://miltiadisgkatzios.github.io/spsh/data/examples.ttl)
 
 ---
 
@@ -33,6 +32,12 @@ https://w3id.org/spsh/data/
 
 This repository is licensed under the Creative Commons Attribution–NonCommercial 4.0 International License (CC BY-NC 4.0).
 You may copy, distribute, and adapt this work for non-commercial purposes, with proper attribution. Commercial use requires prior permission from the authors. See LICENSE for full details.
+
+---
+
+## Contributing
+
+The `w3id/spsh/` folder contains the `.htaccess` file submitted to the [w3id.org](https://w3id.org) persistent identifier service via pull request. It is **not** served locally — changes there must be proposed as a PR to the [w3id.org repository](https://github.com/perma-id/w3id.org).
 
 ---
 
