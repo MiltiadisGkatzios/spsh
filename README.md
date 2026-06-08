@@ -1,7 +1,7 @@
 # SPSH Ontology
 
 ![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
-[Specification](https://w3id.org/spsh/) | [GitHub Pages](https://miltiadisgkatzios.github.io/spsh/)
+[Specification](https://w3id.org/spsh/) | [Ontology](https://w3id.org/spsh/def) | [GitHub Pages](https://miltiadisgkatzios.github.io/spsh/)
 
 This repository contains an ontology that formalizes **SPARQL 1.1 functions** as instances of `sh:SPARQLFunction` using **SHACL Advanced Features**.  
 
@@ -44,4 +44,6 @@ The `w3id/spsh/` folder contains the `.htaccess` file submitted to the [w3id.org
 ## Citation
 If you use this repository in research or projects, please cite:
 Miltiadis Gkatzios. (2026). SPSH Ontology. 
-https://w3id.org/spsh/
+https://w3id.org/spsh/def
+
+**Contributors:** Robin Franken
