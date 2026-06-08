@@ -8,17 +8,16 @@
 @prefix spsh: <https://w3id.org/spsh/def#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/spsh/>
+<https://w3id.org/spsh/def>
   rdf:type owl:Ontology ;
   dc:creator "Miltiadis Gkatzios" ;
+  dcterms:contributor "Robin Franken" ;
   dcterms:created "2023-12-18"^^xsd:date ;
-  dcterms:modified "2026-04-19"^^xsd:date ;
+  dcterms:modified "2026-06-08"^^xsd:date ;
   dcterms:description "An ontology that formalizes SPARQL 1.1 functions as instances of sh:SPARQLFunction using SHACL Advanced Features, enabling standardized SPARQL queries within SHACL sh:TripleRule instances." ;
   dcterms:license <https://creativecommons.org/licenses/by-nc/4.0/> ;
   dcterms:rights "Copyright 2026 Miltiadis Gkatzios. Licensed under CC BY-NC 4.0." ;
   owl:imports sh: ;
-  owl:versionInfo "0.8.0" ;
-  owl:versionIRI <https://w3id.org/spsh/0.8.0/> ;
 .
 
 spsh:ABS

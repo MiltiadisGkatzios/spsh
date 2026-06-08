@@ -11,11 +11,10 @@
 <https://w3id.org/spsh/example/>
   rdf:type owl:Ontology ;
   dc:creator "Miltiadis Gkatzios" ;
+  dcterms:contributor "Robin Franken" ;
   dcterms:created "2025-01-04"^^xsd:date ;
-  dcterms:modified "2026-04-19"^^xsd:date ;
-  owl:imports <https://w3id.org/spsh/> ;
-  owl:versionInfo "0.8.0" ;
-  owl:versionIRI <https://w3id.org/spsh/example/0.8.0/> ;
+  dcterms:modified "2026-06-08"^^xsd:date ;
+  owl:imports <https://w3id.org/spsh/def> ;
 .
 
 # Derived/Computed property
