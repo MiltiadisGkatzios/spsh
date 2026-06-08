@@ -1,4 +1,4 @@
-@base <https://w3id.org/spsh/def/> .
+@base <https://w3id.org/spsh/def> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -8,7 +8,7 @@
 @prefix spsh: <https://w3id.org/spsh/def#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/spsh/def/>
+<https://w3id.org/spsh/def>
   rdf:type owl:Ontology ;
   dc:creator "Miltiadis Gkatzios" ;
   dcterms:contributor "Robin Franken" ;
